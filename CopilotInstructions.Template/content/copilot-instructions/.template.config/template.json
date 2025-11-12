@@ -5,7 +5,6 @@
   "identity": "DimonSmart.CopilotInstructions",
   "name": "Copilot Instructions file",
   "shortName": "copilot-instructions",
-  "sourceName": "copilot-instructions.md",
   "tags": { "language": "none", "type": "item" },
   "preferNameDirectory": false,
   "symbols": {
@@ -14,7 +13,8 @@
       "datatype": "text",
       "replaces": "copilot-instructions.md",
       "defaultValue": "copilot-instructions.md",
-      "description": "Name of the generated file"
+      "description": "Name of the generated file",
+      "fileRename": "copilot-instructions.md"
     }
   },
   "postActions": [
