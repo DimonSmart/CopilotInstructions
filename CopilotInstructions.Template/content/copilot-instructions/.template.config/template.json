@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "DimonSmart",
+  "classifications": [ "Docs", "Copilot" ],
+  "identity": "DimonSmart.CopilotInstructions",
+  "name": "Copilot Instructions file",
+  "shortName": "copilot-instructions",
+  "sourceName": "copilot-instructions.md",
+  "tags": { "language": "none", "type": "item" },
+  "preferNameDirectory": false,
+  "symbols": {
+    "filename": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "copilot-instructions.md",
+      "defaultValue": "copilot-instructions.md",
+      "description": "Name of the generated file"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "CB0D7E06-1C8D-4D1E-AB2E-934F1A4B2911",
+      "description": "copilot-instructions.md file created.",
+      "manualInstructions": [
+        { "text": "Remember to add the file to version control: git add copilot-instructions.md" }
+      ],
+      "continueOnError": true
+    }
+  ]
+}

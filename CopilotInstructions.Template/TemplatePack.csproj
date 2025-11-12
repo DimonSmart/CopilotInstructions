@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>DimonSmart.CopilotInstructions.Template</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>DimonSmart</Authors>
+    <PackageType>Template</PackageType>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoBuild>true</NoBuild>
+    <Description>Template that creates copilot-instructions.md</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="content\**\*" Pack="true" PackagePath="content/" />
+    <None Include="../README.md" Pack="true" PackagePath="/" Visible="false" />
+  </ItemGroup>
+</Project>

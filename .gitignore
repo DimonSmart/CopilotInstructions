@@ -1,0 +1,11 @@
+# Build outputs
+**/bin/
+**/obj/
+artifacts/
+
+# User specific
+*.user
+*.swp
+
+# Packages
+*.nupkg
