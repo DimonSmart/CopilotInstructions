@@ -7,6 +7,7 @@
     <PackageType>Template</PackageType>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoBuild>true</NoBuild>
+    <PackageLicenseExpression>0BSD</PackageLicenseExpression>
     <Description>Template that creates copilot-instructions.md</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
@@ -14,5 +15,6 @@
   <ItemGroup>
     <Content Include="content\**\*" Pack="true" PackagePath="content/" />
     <None Include="../README.md" Pack="true" PackagePath="/" Visible="false" />
+    <None Include="../LICENSE" Pack="true" PackagePath="/" Visible="false" />
   </ItemGroup>
 </Project>
