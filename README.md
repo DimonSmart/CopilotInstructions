@@ -2,13 +2,10 @@
 
 NuGet template that scaffolds a reusable `copilot-instructions.md` file with common C# coding standards.
 
-## Using the template locally
+## Using the published template
 
 ```bash
-# install from local nupkg (after packing)
-dotnet new install ./bin/Release/DimonSmart.CopilotInstructions.Template.*.nupkg
-
-# or install from NuGet once published
+# install from NuGet
 dotnet new install DimonSmart.CopilotInstructions.Template
 
 # create the instructions file in the current directory
@@ -24,13 +21,13 @@ dotnet new copilot-instructions --output . --filename Copilot.md
 2. Adjust metadata in `CopilotInstructions.Template/content/copilot-instructions/.template.config/template.json` if you need new parameters or post actions.
 3. Bump the package version in the release tag (see below) before publishing.
 
-To validate the package locally:
+If you want to test a build before pushing to NuGet:
 
 ```bash
 dotnet pack CopilotInstructions.Template/TemplatePack.csproj --configuration Release --output artifacts
 ```
 
-The command produces a `.nupkg` in the `artifacts/` folder that you can install or push manually.
+The command produces a `.nupkg` in the `artifacts/` folder that you can install manually (for example, via `dotnet new install ./artifacts/*.nupkg`) before pushing it to NuGet.
 
 ## Releasing to NuGet
 
