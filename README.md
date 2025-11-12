@@ -8,18 +8,18 @@ NuGet template that scaffolds a reusable `copilot-instructions.md` file with com
 # install from NuGet
 dotnet new install DimonSmart.CopilotInstructions.Template
 
-# create the instructions file inside .github
-dotnet new copilot-instructions --output .github
+# create the instructions file (automatically placed inside .github)
+dotnet new copilot-instructions
 
 # customize the generated filename (still inside .github)
-dotnet new copilot-instructions --output .github --filename Copilot.md
+dotnet new copilot-instructions --filename Copilot.md
 ```
 
-Specifying `--output .github` is the easiest way to keep your instructions inside the `.github` folder that already holds workflow definitions. `dotnet new` will create the folder if it does not exist, and a custom `--filename` still ends up inside `.github/<your-name>.md`.
+The template now places the file inside `.github` automatically so you don't have to remember the `--output` flag. A custom `--filename` still ends up as `.github/<your-name>.md`.
 
 ## Development workflow
 
-1. Update `CopilotInstructions.Template/content/copilot-instructions/copilot-instructions.md` when the guidance changes.
+1. Update `CopilotInstructions.Template/content/copilot-instructions/.github/copilot-instructions.md` when the guidance changes.
 2. Adjust metadata in `CopilotInstructions.Template/content/copilot-instructions/.template.config/template.json` if you need new parameters or post actions.
 3. Bump the package version in the release tag (see below) before publishing.
 

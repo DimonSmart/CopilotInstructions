@@ -22,7 +22,7 @@
       "actionId": "CB0D7E06-1C8D-4D1E-AB2E-934F1A4B2911",
       "description": "copilot-instructions.md file created.",
       "manualInstructions": [
-        { "text": "Remember to add the file to version control: git add copilot-instructions.md" }
+        { "text": "Remember to add the file to version control: git add .github/copilot-instructions.md" }
       ],
       "continueOnError": true
     }
