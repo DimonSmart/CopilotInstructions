@@ -1,41 +1,27 @@
 # CopilotInstructions Template
 
-NuGet template that scaffolds a reusable `copilot-instructions.md` file with common C# coding standards.
+> ⚠️ Это **шаблон dotnet new**, а не обычный NuGet пакет.
 
-## Using the published template
+## Установка
 
 ```bash
-# install from NuGet
 dotnet new install DimonSmart.CopilotInstructions.Template
-
-# create the instructions file (automatically placed inside .github)
-dotnet new copilot-instructions
-
-# customize the generated filename (still inside .github)
-dotnet new copilot-instructions --filename Copilot.md
 ```
 
-The template now places the file inside `.github` automatically so you don't have to remember the `--output` flag. A custom `--filename` still ends up as `.github/<your-name>.md`.
-
-## Development workflow
-
-1. Update `CopilotInstructions.Template/content/copilot-instructions/.github/copilot-instructions.md` when the guidance changes.
-2. Adjust metadata in `CopilotInstructions.Template/content/copilot-instructions/.template.config/template.json` if you need new parameters or post actions.
-3. Bump the package version in the release tag (see below) before publishing.
-
-If you want to test a build before pushing to NuGet:
+## Использование
 
 ```bash
-dotnet pack CopilotInstructions.Template/TemplatePack.csproj --configuration Release --output artifacts
+dotnet new copilot-instructions
 ```
 
-The command produces a `.nupkg` in the `artifacts/` folder that you can install manually (for example, via `dotnet new install ./artifacts/*.nupkg`) before pushing it to NuGet.
+Создаст файл `.github/copilot-instructions.md` с правилами кодирования для GitHub Copilot.
 
-## Releasing to NuGet
+Опционально можно указать свое имя файла:
 
-Publishing is automated through GitHub Actions. Create and push a tag following the `v*` pattern (for example, `v1.0.0`). The workflow will:
+```bash
+dotnet new copilot-instructions --filename MyCopilot.md
+```
 
-1. Pack the template with the version taken from the tag name (without the leading `v`).
-2. Push the package to NuGet using the `NUGET_API_KEY` secret. Optionally, override the feed URL with a `NUGET_SOURCE` secret.
+## Участие в проекте
 
-Make sure the repository secrets `NUGET_API_KEY` (and optionally `NUGET_SOURCE`) are configured before tagging a release.
+Нашли ошибку или хотите улучшить инструкции? [Issues](https://github.com/DimonSmart/CopilotInstructions/issues) и [Pull Requests](https://github.com/DimonSmart/CopilotInstructions/pulls) приветствуются!
