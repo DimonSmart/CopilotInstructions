@@ -1,27 +1,51 @@
 # CopilotInstructions Template
 
-> ⚠️ Это **шаблон dotnet new**, а не обычный NuGet пакет.
+Spin up project-level guidance for GitHub Copilot in minutes. Instead of assembling expectations and naming rules by hand, this template
+creates a ready-to-use `copilot-instructions.md` file with a single command.
 
-## Установка
+## What's included
+
+- A `dotnet new` template that scaffolds `.github/copilot-instructions.md`.
+- Opinionated guidance on naming, structure, and code style that Copilot can follow.
+- An optional `--filename` parameter to generate instructions under a custom path.
+
+## Quick start
+
+1. Install the template once on your machine:
+
+   ```bash
+   dotnet new install DimonSmart.CopilotInstructions.Template
+   ```
+
+2. Generate the instruction file in any repository:
+
+   ```bash
+   dotnet new copilot-instructions
+   ```
+
+The `copilot-instructions.md` file appears in your project and is ready to share with the team.
+
+## Updating the template
+
+When a new release ships with refined guidelines, reinstall the template and recreate the file where you need the latest version:
 
 ```bash
-dotnet new install DimonSmart.CopilotInstructions.Template
+dotnet new install DimonSmart.CopilotInstructions.Template --force
 ```
 
-## Использование
+Run `dotnet new copilot-instructions` again in each repository that should adopt the update.
 
-```bash
-dotnet new copilot-instructions
-```
+## Why it matters
 
-Создаст файл `.github/copilot-instructions.md` с правилами кодирования для GitHub Copilot.
+GitHub Copilot reads `copilot-instructions.md` before composing suggestions. Clear conventions help Copilot produce accurate, consistent
+completions—especially in larger teams and long-lived codebases.
 
-Опционально можно указать свое имя файла:
+## Resources
 
-```bash
-dotnet new copilot-instructions --filename MyCopilot.md
-```
+- GitHub: https://github.com/DimonSmart/CopilotInstructions
+- NuGet: https://www.nuget.org/packages/DimonSmart.CopilotInstructions.Template
 
-## Участие в проекте
+## Feedback
 
-Нашли ошибку или хотите улучшить инструкции? [Issues](https://github.com/DimonSmart/CopilotInstructions/issues) и [Pull Requests](https://github.com/DimonSmart/CopilotInstructions/pulls) приветствуются!
+Ideas for improving the instructions or template? Open an [issue](https://github.com/DimonSmart/CopilotInstructions/issues) or submit a
+[pull request](https://github.com/DimonSmart/CopilotInstructions/pulls). Contributions are welcome.
