@@ -67,6 +67,7 @@
 - **ID parameters MUST be descriptive**: Never use a bare `id`. Always use `<entity>Name + Id` that reflects the domain meaning:
 - When renaming parameters, update usages including `nameof(...)`, logging placeholders, and validation messages.
 - Return `IReadOnlyCollection<T>` instead of `List<T>` when modification isn't required.
+- **MCP Server Tools exception**: For MCP Server tool parameters exposed via `[McpServerTool]` attribute, use `snake_case` naming (e.g., `model_name`, `connection_name`) to follow MCP protocol conventions and ensure compatibility with MCP clients.
 
 ### Error Handling
 - Return empty collections (`[]`) instead of null when no data is available.
