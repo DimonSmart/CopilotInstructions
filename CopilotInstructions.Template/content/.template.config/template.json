@@ -1,28 +1,46 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "DimonSmart",
-  "classifications": [ "Docs", "Copilot" ],
+  "classifications": [ "Docs", "Copilot", "Codex" ],
   "identity": "DimonSmart.CopilotInstructions",
-  "name": "Copilot Instructions file",
+  "name": "AI instructions files (Copilot + Codex)",
   "shortName": "copilot-instructions",
   "tags": { "language": "none", "type": "item" },
   "preferNameDirectory": false,
   "symbols": {
-    "filename": {
+    "no-codex": {
       "type": "parameter",
-      "datatype": "text",
-      "replaces": "copilot-instructions.md",
-      "defaultValue": "copilot-instructions.md",
-      "description": "Name of the generated file",
-      "fileRename": "copilot-instructions.md"
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Do not create AGENTS.md"
+    },
+    "no-copilot": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Do not create .github/copilot-instructions.md"
     }
   },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(no-codex)",
+          "exclude": [ "AGENTS.md" ]
+        },
+        {
+          "condition": "(no-copilot)",
+          "exclude": [ ".github/copilot-instructions.md" ]
+        }
+      ]
+    }
+  ],
   "postActions": [
     {
       "actionId": "CB0D7E06-1C8D-4D1E-AB2E-934F1A4B2911",
-      "description": "copilot-instructions.md file created.",
+      "description": "AI instruction files created.",
       "manualInstructions": [
-        { "text": "Remember to add the file to version control: git add .github/copilot-instructions.md" }
+        { "text": "Remember to add generated files to version control: git add ." }
       ],
       "continueOnError": true
     }
