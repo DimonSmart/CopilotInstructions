@@ -1,13 +1,18 @@
 # CopilotInstructions Template
 
-Spin up project-level guidance for GitHub Copilot in minutes. Instead of assembling expectations and naming rules by hand, this template
-creates a ready-to-use `copilot-instructions.md` file with a single command.
+Spin up shared project-level guidance for both GitHub Copilot and Codex in minutes. Instead of duplicating the same standards in multiple files,
+this template generates a single source of truth and thin entry points for each assistant.
 
 ## What's included
 
-- A `dotnet new` template that scaffolds `.github/copilot-instructions.md`.
-- Opinionated guidance on naming, structure, and code style that Copilot can follow.
-- An optional `--filename` parameter to generate instructions under a custom path.
+- A `dotnet new` template that scaffolds:
+  - `docs/AI_RULES.md` (primary rules)
+  - `.github/copilot-instructions.md` (Copilot pointer)
+  - `AGENTS.md` (Codex pointer)
+- Opinionated guidance on naming, structure, and code style.
+- Optional switches:
+  - `--no-codex` (skip `AGENTS.md`)
+  - `--no-copilot` (skip `.github/copilot-instructions.md`)
 
 ## Quick start
 
@@ -17,17 +22,29 @@ creates a ready-to-use `copilot-instructions.md` file with a single command.
    dotnet new install DimonSmart.CopilotInstructions.Template
    ```
 
-2. Generate the instruction file in any repository:
+2. Generate instruction files in any repository:
 
    ```bash
    dotnet new copilot-instructions
    ```
 
-The `copilot-instructions.md` file appears in your project and is ready to share with the team.
+## Optional generation examples
+
+Generate only Copilot files:
+
+```bash
+dotnet new copilot-instructions --no-codex true
+```
+
+Generate only Codex files:
+
+```bash
+dotnet new copilot-instructions --no-copilot true
+```
 
 ## Updating the template
 
-When a new release ships with refined guidelines, reinstall the template and recreate the file where you need the latest version:
+When a new release ships with refined guidelines, reinstall the template and recreate files where you need the latest version:
 
 ```bash
 dotnet new install DimonSmart.CopilotInstructions.Template --force
@@ -35,10 +52,15 @@ dotnet new install DimonSmart.CopilotInstructions.Template --force
 
 Run `dotnet new copilot-instructions` again in each repository that should adopt the update.
 
+## Optional extras
+
+- `docs/codex-prompts/` contains reusable prompt templates that can be copied into `~/.codex/prompts`.
+- If you use GitHub Copilot coding agent hooks, consider adding `.github/hooks/hooks.json` in your target repository to enforce checks such as `dotnet test`.
+
 ## Why it matters
 
-GitHub Copilot reads `copilot-instructions.md` before composing suggestions. Clear conventions help Copilot produce accurate, consistent
-completions—especially in larger teams and long-lived codebases.
+Both Copilot and Codex can follow the same standards without file duplication. This reduces maintenance overhead and keeps AI suggestions consistent
+across tools and teams.
 
 ## Resources
 
