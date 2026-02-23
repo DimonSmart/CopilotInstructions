@@ -47,7 +47,7 @@
 - Minimize use of `if…else`; prefer guard clauses and early `return`.
 - Avoid deep nesting of `if` statements; use early exits to keep methods flat.
 - Create router methods that delegate to appropriate specialized services based on conditions.
-- For simple guard clauses, it's acceptable to omit braces and keep the statement on a single line (e.g., `if (question == null) return;`).
+- For simple guard clauses, it's acceptable to omit braces and keep the statement on a single line (e.g., `if (items.Count == 0) return;`).
 
 ### JSON Serialization
 - Use `System.Text.Json` for all JSON (de)serialization.
@@ -74,16 +74,22 @@
 - **MCP Server Tools exception**: For MCP Server tool parameters exposed via `[McpServerTool]` attribute, use `snake_case` naming (e.g., `model_name`, `connection_name`) to follow MCP protocol conventions and ensure compatibility with MCP clients.
 
 ### Error Handling
-- Return empty collections (`[]`) instead of null when no data is available.
+- Return empty collections (`[]`) instead of `null` when no data is available.
 - Log errors with structured logging using `ILogger`.
-- **Fail-fast principle**: Throw exceptions for invalid parameters instead of returning default values that mask bugs. If a required ID/parameter is missing or invalid, throw `InvalidOperationException` or `ArgumentException` with clear error message.
-- **Fail Fast / Design by Contract:** Validate required invariants and configuration once at startup; avoid scattered backup paths and null checks—after initialization, treat values as valid and non-null. If absence is intentional, model it explicitly with `Nullable<T>` or nullable reference types and handle it only at boundaries.
-- **No silent fallbacks for required data**: When a configuration or domain value is required (e.g., a server name), use it directly without null/empty fallbacks. Let missing data surface as errors instead of defaulting to placeholders like `ToString()` or empty strings.
+- **Fail-fast**: Do not hide bugs with default values or silent fallbacks for required data.
+- For invalid input, throw clear exceptions:
+  - `ArgumentNullException` for `null` values when a runtime null check is intentionally required.
+  - `ArgumentException` for invalid values/formats,
+  - `ArgumentOutOfRangeException` for out-of-range values,
+  - `InvalidOperationException` for invalid object/application state.
+- **Design by Contract**: Validate required invariants and configuration at startup; after initialization, treat required values as valid.
+- If absence is intentional, model it explicitly with nullable types (`T?`) and handle it explicitly.
+- Do not use placeholder fallbacks for required values (for example, empty strings, `ToString()`, or dummy names).
 
 ### Architecture
 - Follow Clean Architecture principles with clear separation of concerns.
 - Use dependency injection for service registration and resolution.
-- Organize code into logical layers: API, Services, Models, Shared.
+- Organize code into logical layers appropriate for the project type (for example: API, Services, Models, Shared).
 - Follow DRY principle: extract duplicated logic into helper classes or services.
 - Create specialized services for complex operations instead of embedding logic in multiple places.
 - **Method overloads**: Don't create overloads that merely delegate to another signature — keep one universal version and replace calls accordingly.
@@ -93,9 +99,37 @@
 - **Factory methods exception**: Factory methods like `CreateFromDomainModel` or similar that combine multiple operations for code readability and provide meaningful naming are acceptable and improve code clarity.
 
 ### Modern C# Features
-- Use target-typed expressions where appropriate (`return [];`).
-- Leverage nullable reference types for better null safety.
+- Use target-typed expressions where appropriate (e.g., `return [];`).
+- Leverage nullable reference types (`<Nullable>enable</Nullable>`) for null safety.
 - Use pattern matching and modern C# syntax when it improves readability.
+- **Nullability is part of the contract**:
+  - If a value can be `null`, it must be explicitly declared as nullable (`string?`, `T?`) and handled in code.
+  - If a parameter is non-nullable, treat it as required and do not add repetitive manual null guards.
+  - Do not use silent null fallbacks for required values.
+- Validate semantic correctness separately from nullability (e.g., empty/whitespace strings, invalid ranges, invalid formats).
+
+### Async
+- Suffix asynchronous methods with `Async`.
+- Accept `CancellationToken` in async public methods and pass it through to dependencies.
+- Avoid `.Result` / `.Wait()` in async code; use `await`.
+- Avoid `async void` except for UI event handlers.
+- Do not start fire-and-forget tasks without explicit handling/logging.
+
+### Refactoring
+- **No compatibility-by-default**: When refactoring, do not add backward-compatibility layers, wrappers, fallback paths, obsolete overloads, or duplicate APIs unless compatibility is explicitly requested.
+- Prefer a clean replacement over "temporary" compatibility code that preserves old behavior just in case.
+- If compatibility is required, make it explicit in naming and comments (what is preserved, for whom, and when it can be removed).
+
+### Change Discipline
+- Prefer the smallest correct change: modify or remove existing code before adding new code.
+- Do not introduce new wrappers, helpers, abstractions, or layers if a direct edit solves the task clearly.
+- Keep diffs minimal: avoid unrelated additions, duplication, or "future-proofing" code not required by the task.
+
+### Principle of Least Surprise
+- Design methods and interfaces so their behavior is predictable from the name, parameters, return type, and containing interface.
+- Keep contracts focused and intention-revealing. Require only data relevant to the declared responsibility.
+- Avoid hidden side effects, surprising dependencies, and unrelated concerns in the same contract.
+- If non-obvious behavior is required, make it explicit in naming, types, or documentation.
 
 ### Validation Checklist
 - Run tests and checks required by the repository after code changes.
