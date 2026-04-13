@@ -18,7 +18,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
+
+      - name: Smoke test template
+        run: dotnet run ./scripts/SmokeTest-Template.cs
 
       - name: Extract version from tag
         id: extract_version

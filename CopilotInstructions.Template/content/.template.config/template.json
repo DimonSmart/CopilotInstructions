@@ -19,30 +19,216 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Do not create .github/copilot-instructions.md"
+    },
+    "profile": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "default",
+      "description": "Recommended project profile pack",
+      "choices": [
+        {
+          "choice": "default",
+          "description": "Only core guidance"
+        },
+        {
+          "choice": "library",
+          "description": "Add library API guidance"
+        },
+        {
+          "choice": "aspnet",
+          "description": "Add ASP.NET guidance"
+        },
+        {
+          "choice": "blazor",
+          "description": "Add Blazor guidance"
+        }
+      ]
+    },
+    "with-path-instructions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Create .github/instructions/*.instructions.md files for GitHub Copilot"
+    },
+    "packs": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "",
+      "description": "Additional packs separated with ';' (library;aspnet;blazor;tests;mcp;analyzers)"
+    },
+    "with-nullable-skill": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include nullable-attributes skill files"
+    },
+    "noCopilot": {
+      "type": "computed",
+      "value": "(no-copilot)"
+    },
+    "noCodex": {
+      "type": "computed",
+      "value": "(no-codex)"
+    },
+    "withPathInstructions": {
+      "type": "computed",
+      "value": "(with-path-instructions)"
+    },
+    "includeLibraryPackByName": {
+      "type": "generated",
+      "generator": "regexMatch",
+      "dataType": "bool",
+      "parameters": {
+        "source": "packs",
+        "pattern": "(^|\\s*[;,]\\s*)library(\\s*[;,]\\s*|$)"
+      }
+    },
+    "includeAspNetPackByName": {
+      "type": "generated",
+      "generator": "regexMatch",
+      "dataType": "bool",
+      "parameters": {
+        "source": "packs",
+        "pattern": "(^|\\s*[;,]\\s*)aspnet(\\s*[;,]\\s*|$)"
+      }
+    },
+    "includeBlazorPackByName": {
+      "type": "generated",
+      "generator": "regexMatch",
+      "dataType": "bool",
+      "parameters": {
+        "source": "packs",
+        "pattern": "(^|\\s*[;,]\\s*)blazor(\\s*[;,]\\s*|$)"
+      }
+    },
+    "includeMcpPackByName": {
+      "type": "generated",
+      "generator": "regexMatch",
+      "dataType": "bool",
+      "parameters": {
+        "source": "packs",
+        "pattern": "(^|\\s*[;,]\\s*)mcp(\\s*[;,]\\s*|$)"
+      }
+    },
+    "includeTestsPackByName": {
+      "type": "generated",
+      "generator": "regexMatch",
+      "dataType": "bool",
+      "parameters": {
+        "source": "packs",
+        "pattern": "(^|\\s*[;,]\\s*)tests(\\s*[;,]\\s*|$)"
+      }
+    },
+    "includeAnalyzersPackByName": {
+      "type": "generated",
+      "generator": "regexMatch",
+      "dataType": "bool",
+      "parameters": {
+        "source": "packs",
+        "pattern": "(^|\\s*[;,]\\s*)analyzers(\\s*[;,]\\s*|$)"
+      }
+    },
+    "includeLibraryPack": {
+      "type": "computed",
+      "value": "(profile == \"library\" || includeLibraryPackByName)"
+    },
+    "includeAspNetPack": {
+      "type": "computed",
+      "value": "(profile == \"aspnet\" || profile == \"blazor\" || includeAspNetPackByName)"
+    },
+    "includeBlazorPack": {
+      "type": "computed",
+      "value": "(profile == \"blazor\" || includeBlazorPackByName)"
+    },
+    "includeMcpPack": {
+      "type": "computed",
+      "value": "(includeMcpPackByName)"
+    },
+    "includeTestsPack": {
+      "type": "computed",
+      "value": "(includeTestsPackByName)"
+    },
+    "includeAnalyzersPack": {
+      "type": "computed",
+      "value": "(includeAnalyzersPackByName)"
+    },
+    "emitPathInstructions": {
+      "type": "computed",
+      "value": "(withPathInstructions && !noCopilot)"
+    },
+    "withNullableSkill": {
+      "type": "computed",
+      "value": "(with-nullable-skill)"
     }
   },
   "sources": [
     {
       "modifiers": [
         {
-          "condition": "(no-codex)",
-          "exclude": [ "AGENTS.md" ]
+          "condition": "(noCodex)",
+          "exclude": [ "AGENTS.md", "AGENTS.local.md", "CLAUDE.md", "GEMINI.md" ]
         },
         {
-          "condition": "(no-copilot)",
-          "exclude": [ ".github/copilot-instructions.md" ]
+          "condition": "(noCopilot)",
+          "exclude": [ ".github/copilot-instructions.md", ".github/skills/**" ]
+        },
+        {
+          "condition": "(!emitPathInstructions)",
+          "exclude": [ ".github/instructions/**" ]
+        },
+        {
+          "condition": "(noCodex)",
+          "exclude": [ ".codex/**" ]
+        },
+        {
+          "condition": "(!includeLibraryPack)",
+          "exclude": [ "docs/ai-context/packs/library.md" ]
+        },
+        {
+          "condition": "(!includeAspNetPack)",
+          "exclude": [ "docs/ai-context/packs/aspnet.md" ]
+        },
+        {
+          "condition": "(!includeBlazorPack)",
+          "exclude": [ "docs/ai-context/packs/blazor.md" ]
+        },
+        {
+          "condition": "(!includeMcpPack)",
+          "exclude": [ "docs/ai-context/packs/mcp.md" ]
+        },
+        {
+          "condition": "(!includeTestsPack)",
+          "exclude": [ "docs/ai-context/packs/tests.md" ]
+        },
+        {
+          "condition": "(!includeAnalyzersPack)",
+          "exclude": [ "docs/ai-context/packs/analyzers.md" ]
+        },
+        {
+          "condition": "(!withNullableSkill)",
+          "exclude": [
+            "docs/ai-skills/nullable-attributes/**",
+            ".github/skills/nullable-attributes/**",
+            ".codex/skills/nullable-attributes/**"
+          ]
+        },
+        {
+          "condition": "(!includeAspNetPack)",
+          "exclude": [
+            "docs/ai-skills/aspnet/**",
+            ".github/skills/aspnet/**",
+            ".codex/skills/aspnet/**"
+          ]
+        },
+        {
+          "condition": "(!includeBlazorPack)",
+          "exclude": [
+            "docs/ai-skills/blazor/**",
+            ".github/skills/blazor/**",
+            ".codex/skills/blazor/**"
+          ]
         }
       ]
-    }
-  ],
-  "postActions": [
-    {
-      "actionId": "CB0D7E06-1C8D-4D1E-AB2E-934F1A4B2911",
-      "description": "AI instruction files created.",
-      "manualInstructions": [
-        { "text": "Remember to add generated files to version control: git add ." }
-      ],
-      "continueOnError": true
     }
   ]
 }

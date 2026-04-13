@@ -1,18 +1,28 @@
 # CopilotInstructions Template
 
-Spin up shared project-level guidance for both GitHub Copilot and Codex in minutes. Instead of duplicating the same standards in multiple files,
-this template generates a single source of truth and thin entry points for each assistant.
+Generate compact shared AI guidance for both GitHub Copilot and Codex. The template keeps one main entry file, moves details into short context files,
+and stays lightweight enough for a normal `dotnet new` workflow.
 
 ## What's included
 
 - A `dotnet new` template that scaffolds:
-  - `docs/AI_RULES.md` (primary rules)
-  - `.github/copilot-instructions.md` (Copilot pointer)
-  - `AGENTS.md` (Codex pointer)
-- Opinionated guidance on naming, structure, and code style.
+  - `docs/AI_RULES.md` (primary entry point)
+  - `docs/ai-context/core.md` (design principles and general rules)
+  - `docs/ai-context/dotnet.md` (C#/.NET rules)
+  - `docs/ai-skills/*/references/*.md` (shared detailed skill references)
+  - `docs/ai-context/packs/*.md` (selected optional packs)
+  - `docs/ai-context/references/*.md` (short checklists)
+  - `.codex/skills/*/SKILL.md` (Codex project-local skills)
+  - `.github/copilot-instructions.md` (Copilot entry point)
+  - `.github/skills/*/SKILL.md` (Copilot project-local skills)
+  - `AGENTS.md` (Codex entry point)
+- Optional path-specific GitHub Copilot instructions in `.github/instructions/`.
 - Optional switches:
   - `--no-codex` (skip `AGENTS.md`)
   - `--no-copilot` (skip `.github/copilot-instructions.md`)
+  - `--profile` (`default`, `library`, `aspnet`, `blazor`)
+  - `--packs "tests;mcp"` (additional packs)
+  - `--with-path-instructions true`
 
 ## Quick start
 
@@ -28,6 +38,42 @@ this template generates a single source of truth and thin entry points for each 
    dotnet new copilot-instructions
    ```
 
+## Structure
+
+```text
+docs/
+  AI_RULES.md
+  ai-context/
+    core.md
+    dotnet.md
+    packs/
+    references/
+  ai-skills/
+    nullable-attributes/
+      references/
+
+.codex/
+  skills/
+
+.github/
+  copilot-instructions.md
+  instructions/
+  skills/
+
+AGENTS.md
+```
+
+`docs/AI_RULES.md` stays the main entry point. `core.md` holds design principles and general rules, `dotnet.md` holds C#/.NET-specific rules,
+`packs/` adds small project-specific context, `references/` keeps checklists out of the main file, and `docs/ai-skills/` keeps heavier skill references
+shared by native project-local skills in `.codex/skills/` and `.github/skills/`.
+
+## Profiles
+
+- `default`: core guidance only.
+- `library`: for reusable packages and public API design.
+- `aspnet`: for HTTP-first ASP.NET services and web apps.
+- `blazor`: for Razor component projects and MudBlazor-style UI work.
+
 ## Optional generation examples
 
 Generate only Copilot files:
@@ -40,6 +86,18 @@ Generate only Codex files:
 
 ```bash
 dotnet new copilot-instructions --no-copilot true
+```
+
+Generate Blazor guidance with test and MCP packs:
+
+```bash
+dotnet new copilot-instructions --profile blazor --packs "tests;mcp"
+```
+
+Generate GitHub Copilot path-specific instructions:
+
+```bash
+dotnet new copilot-instructions --with-path-instructions true
 ```
 
 ## Updating the template
@@ -57,10 +115,15 @@ Run `dotnet new copilot-instructions` again in each repository that should adopt
 - `docs/codex-prompts/` contains reusable prompt templates that can be copied into `~/.codex/prompts`.
 - If you use GitHub Copilot coding agent hooks, consider adding `.github/hooks/hooks.json` in your target repository to enforce checks such as `dotnet test`.
 
-## Why it matters
+## Smoke test
 
-Both Copilot and Codex can follow the same standards without file duplication. This reduces maintenance overhead and keeps AI suggestions consistent
-across tools and teams.
+Run the repository smoke test before publishing template changes:
+
+```powershell
+dotnet run .\scripts\SmokeTest-Template.cs
+```
+
+The smoke test is a file-based C# app. It packs the template, installs the resulting package, generates several scenarios, and validates that expected files and links are present.
 
 ## Resources
 

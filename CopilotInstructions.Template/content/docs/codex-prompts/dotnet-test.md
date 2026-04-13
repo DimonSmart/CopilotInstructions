@@ -1,3 +1,9 @@
+---
+id: prompt-dotnet-test
+scope: [codex]
+category: prompt
+requires: [dotnet-rules, pack-tests]
+---
 # dotnet-test
 
 Run the solution tests and report:

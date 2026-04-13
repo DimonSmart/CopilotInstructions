@@ -1,3 +1,9 @@
+---
+id: prompt-refactor-small
+scope: [codex]
+category: prompt
+requires: [core-rules]
+---
 # refactor-small
 
 Do a small, safe refactor:
