@@ -181,11 +181,11 @@ sealed class SmokeTestRunner
             ExistingPaths:
             [
                 "docs/ai-context/packs/blazor.md",
+                "docs/ai-context/packs/aspnet.md",
             ],
             MissingPaths:
             [
                 "docs/ai-context/packs/library.md",
-                "docs/ai-context/packs/aspnet.md",
                 "docs/ai-context/packs/tests.md",
             ],
             Contains: []),

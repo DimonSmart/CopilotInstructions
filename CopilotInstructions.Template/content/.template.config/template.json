@@ -59,7 +59,7 @@
     "with-nullable-skill": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "false",
+      "defaultValue": "true",
       "description": "Include nullable-attributes skill files"
     },
     "noCopilot": {

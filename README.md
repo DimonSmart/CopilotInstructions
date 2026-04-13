@@ -72,7 +72,7 @@ shared by native project-local skills in `.codex/skills/` and `.github/skills/`.
 - `default`: core guidance only.
 - `library`: for reusable packages and public API design.
 - `aspnet`: for HTTP-first ASP.NET services and web apps.
-- `blazor`: for Razor component projects and MudBlazor-style UI work.
+- `blazor`: for Razor component projects and MudBlazor-style UI work; includes the ASP.NET pack.
 
 ## Optional generation examples
 
