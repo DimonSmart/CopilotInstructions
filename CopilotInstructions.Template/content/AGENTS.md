@@ -17,6 +17,21 @@ When changing code:
 - keep changes small and predictable
 - run repo checks before finishing (see `docs/AI_RULES.md` for commands)
 
+## README writing style
+
+When creating or editing `README.md` or `README*.md`, follow:
+
+- `docs/style/readme-style.md`
+- `docs/style/llm-antipatterns.md`
+- `docs/style/readme-review-checklist.md`
+- `docs/style/examples.md`
+
+For README work, use:
+
+- `.codex/skills/readme-human-style/SKILL.md`
+
+Main rule: README text must be concrete, technical, and close to the author's personal engineering style. Avoid generic LLM writing and marketing tone.
+
 ## User Overrides
 
 Read `AGENTS.local.md` after this file if it exists.
