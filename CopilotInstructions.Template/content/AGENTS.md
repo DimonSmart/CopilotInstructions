@@ -11,7 +11,7 @@ Primary rules: `docs/AI_RULES.md`.
 When changing code:
 - read `docs/ai-context/core.md` first
 - read `docs/ai-context/dotnet.md` for C# and .NET changes
-- apply matching skills from `.codex/skills/` when present
+- apply matching skills from `.agents/skills/` when present
 - apply every file in `docs/ai-context/packs/` when present
 - use prompts from `docs/codex-prompts/` for task-specific guidance when present
 - keep changes small and predictable
@@ -28,7 +28,7 @@ When creating or editing `README.md` or `README*.md`, follow:
 
 For README work, use:
 
-- `.codex/skills/readme-human-style/SKILL.md`
+- `.agents/skills/readme-human-style/SKILL.md`
 
 Main rule: README text must be concrete, technical, and close to the author's personal engineering style. Avoid generic LLM writing and marketing tone.
 

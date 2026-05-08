@@ -12,17 +12,19 @@ and stays lightweight enough for a normal `dotnet new` workflow.
   - `docs/ai-skills/*/references/*.md` (shared detailed skill references)
   - `docs/ai-context/packs/*.md` (selected optional packs)
   - `docs/ai-context/references/*.md` (short checklists)
-  - `.codex/skills/*/SKILL.md` (Codex project-local skills)
+  - `.agents/skills/*/SKILL.md` (Codex project-local skills)
   - `.github/copilot-instructions.md` (Copilot entry point)
   - `.github/skills/*/SKILL.md` (Copilot project-local skills)
   - `AGENTS.md` (Codex entry point)
 - Optional path-specific GitHub Copilot instructions in `.github/instructions/`.
+- Optional worklog-driven development files with `/.worklog`, templates, and project-local skills.
 - Optional switches:
-  - `--no-codex` (skip `AGENTS.md`)
+  - `--no-codex` (skip `AGENTS.md`, companion agent files, and Codex/Claude skills)
   - `--no-copilot` (skip `.github/copilot-instructions.md`)
   - `--profile` (`default`, `library`, `aspnet`, `blazor`)
   - `--packs "tests;mcp"` (additional packs)
   - `--with-path-instructions true`
+  - `--with-worklog true`
 
 ## Quick start
 
@@ -43,6 +45,7 @@ and stays lightweight enough for a normal `dotnet new` workflow.
 ```text
 docs/
   AI_RULES.md
+  worklog-method.md    # with --with-worklog true
   ai-context/
     core.md
     dotnet.md
@@ -52,7 +55,10 @@ docs/
     nullable-attributes/
       references/
 
-.codex/
+.agents/
+  skills/
+
+.claude/              # with --with-worklog true
   skills/
 
 .github/
@@ -60,12 +66,15 @@ docs/
   instructions/
   skills/
 
+.worklog/                 # with --with-worklog true
+  _templates/
+
 AGENTS.md
 ```
 
 `docs/AI_RULES.md` stays the main entry point. `core.md` holds design principles and general rules, `dotnet.md` holds C#/.NET-specific rules,
 `packs/` adds small project-specific context, `references/` keeps checklists out of the main file, and `docs/ai-skills/` keeps heavier skill references
-shared by native project-local skills in `.codex/skills/` and `.github/skills/`.
+shared by native project-local skills in `.agents/skills/` and `.github/skills/`.
 
 ## Profiles
 
@@ -98,6 +107,12 @@ Generate GitHub Copilot path-specific instructions:
 
 ```bash
 dotnet new copilot-instructions --with-path-instructions true
+```
+
+Generate worklog methodology and skills:
+
+```bash
+dotnet new copilot-instructions --with-worklog true
 ```
 
 ## Updating the template

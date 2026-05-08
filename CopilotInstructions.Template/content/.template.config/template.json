@@ -12,7 +12,7 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Do not create AGENTS.md"
+      "description": "Do not create AGENTS.md, companion agent files, or Codex/Claude skills"
     },
     "no-copilot": {
       "type": "parameter",
@@ -50,6 +50,12 @@
       "defaultValue": "false",
       "description": "Create .github/instructions/*.instructions.md files for GitHub Copilot"
     },
+    "with-worklog": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Create worklog methodology, templates, and worklog skills"
+    },
     "packs": {
       "type": "parameter",
       "datatype": "text",
@@ -73,6 +79,10 @@
     "withPathInstructions": {
       "type": "computed",
       "value": "(with-path-instructions)"
+    },
+    "withWorklog": {
+      "type": "computed",
+      "value": "(with-worklog)"
     },
     "includeLibraryPackByName": {
       "type": "generated",
@@ -178,7 +188,22 @@
         },
         {
           "condition": "(noCodex)",
-          "exclude": [ ".codex/**" ]
+          "exclude": [ ".agents/**", ".claude/**" ]
+        },
+        {
+          "condition": "(!withWorklog)",
+          "exclude": [
+            "docs/worklog-method.md",
+            "docs/ai-context/packs/worklog.md",
+            ".worklog/**",
+            ".agents/skills/worklog-start/**",
+            ".agents/skills/worklog-close/**",
+            ".agents/skills/worklog-review/**",
+            ".claude/**",
+            ".github/skills/worklog-start/**",
+            ".github/skills/worklog-close/**",
+            ".github/skills/worklog-review/**"
+          ]
         },
         {
           "condition": "(!includeLibraryPack)",
@@ -209,7 +234,7 @@
           "exclude": [
             "docs/ai-skills/nullable-attributes/**",
             ".github/skills/nullable-attributes/**",
-            ".codex/skills/nullable-attributes/**"
+            ".agents/skills/nullable-attributes/**"
           ]
         },
         {
@@ -217,7 +242,7 @@
           "exclude": [
             "docs/ai-skills/aspnet/**",
             ".github/skills/aspnet/**",
-            ".codex/skills/aspnet/**"
+            ".agents/skills/aspnet/**"
           ]
         },
         {
@@ -225,7 +250,7 @@
           "exclude": [
             "docs/ai-skills/blazor/**",
             ".github/skills/blazor/**",
-            ".codex/skills/blazor/**"
+            ".agents/skills/blazor/**"
           ]
         }
       ]

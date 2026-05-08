@@ -132,15 +132,19 @@ sealed class SmokeTestRunner
                 "docs/ai-context/dotnet.md",
                 "docs/ai-skills/nullable-attributes/references/nullable-attributes.md",
                 "docs/ai-context/references/code-review-checklist.md",
-                ".codex/skills/nullable-attributes/SKILL.md",
+                ".agents/skills/nullable-attributes/SKILL.md",
                 ".github/copilot-instructions.md",
                 ".github/skills/nullable-attributes/SKILL.md",
                 "AGENTS.md",
             ],
             MissingPaths:
             [
+                ".codex",
+                ".claude",
                 ".github/instructions",
                 "docs/ai-context/packs",
+                "docs/worklog-method.md",
+                ".worklog",
             ],
             Contains:
             [
@@ -154,7 +158,7 @@ sealed class SmokeTestRunner
             [
                 "docs/AI_RULES.md",
                 "AGENTS.md",
-                ".codex/skills/nullable-attributes/SKILL.md",
+                ".agents/skills/nullable-attributes/SKILL.md",
             ],
             MissingPaths:
             [
@@ -172,7 +176,57 @@ sealed class SmokeTestRunner
             MissingPaths:
             [
                 "AGENTS.md",
+                "CLAUDE.md",
+                "GEMINI.md",
+                ".agents",
+                ".claude",
+            ],
+            Contains: []),
+        new(
+            "with-worklog",
+            ["--with-worklog", "true"],
+            ExistingPaths:
+            [
+                "docs/worklog-method.md",
+                "docs/ai-context/packs/worklog.md",
+                ".worklog/README.md",
+                ".worklog/_templates/spec.md",
+                ".worklog/_templates/task.md",
+                ".worklog/_templates/adr.md",
+                ".worklog/_templates/spike.md",
+                ".agents/skills/worklog-start/SKILL.md",
+                ".agents/skills/worklog-close/SKILL.md",
+                ".agents/skills/worklog-review/SKILL.md",
+                ".claude/skills/worklog-start/SKILL.md",
+                ".claude/skills/worklog-close/SKILL.md",
+                ".claude/skills/worklog-review/SKILL.md",
+                ".github/skills/worklog-start/SKILL.md",
+                ".github/skills/worklog-close/SKILL.md",
+                ".github/skills/worklog-review/SKILL.md",
+            ],
+            MissingPaths:
+            [
                 ".codex",
+                ".worklog/0001.spec.initial-mvp.md",
+            ],
+            Contains:
+            [
+                new ContentExpectation("docs/ai-context/packs/worklog.md", "docs/worklog-method.md"),
+                new ContentExpectation(".agents/skills/worklog-start/SKILL.md", ".worklog/_templates/"),
+            ]),
+        new(
+            "with-worklog-no-copilot",
+            ["--with-worklog", "true", "--no-copilot", "true"],
+            ExistingPaths:
+            [
+                "docs/worklog-method.md",
+                ".worklog/_templates/spec.md",
+                ".agents/skills/worklog-start/SKILL.md",
+                ".claude/skills/worklog-start/SKILL.md",
+            ],
+            MissingPaths:
+            [
+                ".github",
             ],
             Contains: []),
         new(
