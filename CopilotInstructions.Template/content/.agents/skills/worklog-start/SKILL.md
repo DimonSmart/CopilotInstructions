@@ -22,7 +22,7 @@ Task:
 4. If it needs one:
    - determine the next `NNNN` number;
    - choose one type: `spec`, `task`, `adr`, or `spike`;
-   - create `.worklog/NNNN.type.short-title.md`;
+   - create `.worklog/NNNN.type-short-title.md`;
    - fill it using the matching template;
    - keep scope narrow;
    - add explicit non-goals for specs;

@@ -194,12 +194,15 @@ sealed class SmokeTestRunner
                 ".worklog/_templates/task.md",
                 ".worklog/_templates/adr.md",
                 ".worklog/_templates/spike.md",
+                ".agents/skills/worklog-import/SKILL.md",
                 ".agents/skills/worklog-start/SKILL.md",
                 ".agents/skills/worklog-close/SKILL.md",
                 ".agents/skills/worklog-review/SKILL.md",
+                ".claude/skills/worklog-import/SKILL.md",
                 ".claude/skills/worklog-start/SKILL.md",
                 ".claude/skills/worklog-close/SKILL.md",
                 ".claude/skills/worklog-review/SKILL.md",
+                ".github/skills/worklog-import/SKILL.md",
                 ".github/skills/worklog-start/SKILL.md",
                 ".github/skills/worklog-close/SKILL.md",
                 ".github/skills/worklog-review/SKILL.md",
@@ -207,7 +210,7 @@ sealed class SmokeTestRunner
             MissingPaths:
             [
                 ".codex",
-                ".worklog/0001.spec.initial-mvp.md",
+                ".worklog/0001.spec-initial-mvp.md",
             ],
             Contains:
             [
@@ -221,7 +224,9 @@ sealed class SmokeTestRunner
             [
                 "docs/worklog-method.md",
                 ".worklog/_templates/spec.md",
+                ".agents/skills/worklog-import/SKILL.md",
                 ".agents/skills/worklog-start/SKILL.md",
+                ".claude/skills/worklog-import/SKILL.md",
                 ".claude/skills/worklog-start/SKILL.md",
             ],
             MissingPaths:

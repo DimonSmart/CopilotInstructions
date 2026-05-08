@@ -196,10 +196,12 @@
             "docs/worklog-method.md",
             "docs/ai-context/packs/worklog.md",
             ".worklog/**",
+            ".agents/skills/worklog-import/**",
             ".agents/skills/worklog-start/**",
             ".agents/skills/worklog-close/**",
             ".agents/skills/worklog-review/**",
             ".claude/**",
+            ".github/skills/worklog-import/**",
             ".github/skills/worklog-start/**",
             ".github/skills/worklog-close/**",
             ".github/skills/worklog-review/**"

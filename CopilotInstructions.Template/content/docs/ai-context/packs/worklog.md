@@ -12,7 +12,7 @@ Before significant project work:
 - read `docs/worklog-method.md`
 - inspect the latest numbered files in `.worklog/`
 - decide whether the change needs a new work document
-- if yes, create the next `NNNN.type.short-title.md` file from `.worklog/_templates/`
+- if yes, create the next `NNNN.type-short-title.md` file from `.worklog/_templates/`
 
 Do not create a work document for small product-neutral changes or fixes: typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, dependency patches with no project-specific decision, or anything fully explained by a commit message.
 

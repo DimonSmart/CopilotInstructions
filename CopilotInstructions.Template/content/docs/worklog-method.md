@@ -14,14 +14,14 @@ All work documents live in `/.worklog`.
 
 Use one increasing numeric sequence:
 
-`NNNN.type.short-title.md`
+`NNNN.type-short-title.md`
 
 Examples:
 
-- `0001.spec.initial-mvp.md`
-- `0002.spike.console-double-buffering.md`
-- `0003.adr.use-console-frame-buffer.md`
-- `0004.task.implement-buffered-renderer.md`
+- `0001.spec-initial-mvp.md`
+- `0002.spike-console-double-buffering.md`
+- `0003.adr-use-console-frame-buffer.md`
+- `0004.task-implement-buffered-renderer.md`
 
 Do not split documents into `/specs`, `/tasks`, `/adr`, or `/spikes`. The sequence matters more than classification folders.
 
