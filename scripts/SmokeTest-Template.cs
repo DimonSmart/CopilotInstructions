@@ -191,7 +191,6 @@ sealed class SmokeTestRunner
                 "docs/ai-context/packs/worklog.md",
                 ".worklog/README.md",
                 ".worklog/_templates/spec.md",
-                ".worklog/_templates/task.md",
                 ".worklog/_templates/adr.md",
                 ".worklog/_templates/spike.md",
                 ".agents/skills/worklog-import/SKILL.md",
@@ -211,6 +210,7 @@ sealed class SmokeTestRunner
             [
                 ".codex",
                 ".worklog/0001.spec-initial-mvp.md",
+                ".worklog/_templates/task.md",
             ],
             Contains:
             [

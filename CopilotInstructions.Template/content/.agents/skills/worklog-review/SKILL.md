@@ -17,7 +17,7 @@ Check:
 
 1. Does this change require a work document?
 2. If yes, does the document exist?
-3. Is the type correct: `spec`, `task`, `adr`, or `spike`?
+3. Is the type correct: `spec`, `adr`, or `spike`?
 4. Is the numeric sequence correct?
 5. Does the document have clear Goal, Context, Done criteria, and Outcome?
 6. Are accepted ADRs left immutable?

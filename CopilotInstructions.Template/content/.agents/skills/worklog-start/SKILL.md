@@ -1,6 +1,6 @@
 ---
 name: worklog-start
-description: Create the next numbered work document before significant implementation work. Use when starting a feature, non-trivial fix, architecture decision, or spike.
+description: Create the next numbered work document before significant implementation work. Use when starting a feature, user-visible behavior change, architecture decision, or spike.
 ---
 
 # Worklog start
@@ -21,7 +21,7 @@ Task:
 3. If it does not need one, explain briefly why.
 4. If it needs one:
    - determine the next `NNNN` number;
-   - choose one type: `spec`, `task`, `adr`, or `spike`;
+   - choose one type: `spec`, `adr`, or `spike`;
    - create `.worklog/NNNN.type-short-title.md`;
    - fill it using the matching template;
    - keep scope narrow;
@@ -33,6 +33,7 @@ Rules:
 
 - Do not implement code in this skill unless the user explicitly asks to continue after the document is created.
 - Do not create a work document for small product-neutral changes or fixes that are fully captured by a commit message.
+- Do not create `task` work documents; small local tasks belong in commit messages unless they are really a `spec`, `adr`, or `spike`.
 - Keep typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, and dependency patches with no project-specific decision out of `.worklog/`.
 - Do not invent requirements.
 - If important information is missing, mark it as `TBD` instead of guessing.

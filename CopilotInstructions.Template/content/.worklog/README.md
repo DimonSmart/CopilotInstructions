@@ -6,14 +6,15 @@ Small product-neutral changes and fixes are described in commit messages, not he
 
 Use one increasing sequence for all significant work documents:
 
-`NNNN.type.short-title.md`
+`NNNN.type-short-title.md`
 
 Types:
 
 - `spec` - feature or behavior change;
-- `task` - small local change;
 - `adr` - architecture decision;
 - `spike` - investigation.
+
+There is no `task` worklog type. Small local changes belong in commit messages unless they require a `spec`, `adr`, or `spike`.
 
 Do not split documents into separate folders by type.
 

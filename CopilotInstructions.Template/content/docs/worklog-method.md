@@ -21,9 +21,8 @@ Examples:
 - `0001.spec-initial-mvp.md`
 - `0002.spike-console-double-buffering.md`
 - `0003.adr-use-console-frame-buffer.md`
-- `0004.task-implement-buffered-renderer.md`
 
-Do not split documents into `/specs`, `/tasks`, `/adr`, or `/spikes`. The sequence matters more than classification folders.
+Do not split documents into `/specs`, `/adr`, or `/spikes`. The sequence matters more than classification folders.
 
 ## Document Types
 
@@ -32,12 +31,6 @@ Do not split documents into `/specs`, `/tasks`, `/adr`, or `/spikes`. The sequen
 Use `spec` when the system gets a new capability or user-visible behavior changes.
 
 Question answered: what should the system do?
-
-### task
-
-Use `task` for small local changes where the intent is not obvious from the diff.
-
-Question answered: what should be fixed now?
 
 ### adr
 
@@ -64,6 +57,8 @@ Do not create a numbered work document for:
 - dependency patch updates with no project-specific decision.
 
 Also do not create a work document for small changes or fixes that do not affect the product as such: no architecture change, no library choice, no experiment, no new capability, and no user-visible behavior change. Describe those changes at the commit-message level.
+
+There is no `task` work document type. Small local tasks stay in commit messages unless they are really a `spec`, `adr`, or `spike`.
 
 ## Required Sections
 
