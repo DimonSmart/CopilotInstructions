@@ -209,7 +209,7 @@ sealed class SmokeTestRunner
             MissingPaths:
             [
                 ".codex",
-                ".worklog/0001.spec-initial-mvp.md",
+                ".worklog/0001.spec-initial-mvp.active.md",
                 ".worklog/_templates/task.md",
             ],
             Contains:

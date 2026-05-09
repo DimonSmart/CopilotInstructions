@@ -111,7 +111,7 @@ If `docs/worklog-method.md` does not exist, report that the methodology file is 
 5. Determine the next `NNNN` number after existing numbered `.worklog` documents.
 6. For each source document, choose one type: `spec`, `adr`, or `spike`.
 7. Create a short kebab-case title from the existing file name or document heading.
-8. Rename or move each document to `.worklog/NNNN.type-short-title.md`.
+8. Rename or move each document to `.worklog/NNNN.type-short-title.active.md` unless the user explicitly says it is historical.
 9. Preserve ordering by prioritizing explicit source numbering first, followed by dates. If neither is present, use stable path sort.
 10. Report the old path to new path mapping.
 
@@ -156,7 +156,7 @@ Do not invent a classification only to complete the import.
 Target file name format:
 
 ```text
-.worklog/NNNN.type-short-title.md
+.worklog/NNNN.type-short-title.lifecycle.md
 ```
 
 Where:
@@ -164,14 +164,17 @@ Where:
 - `NNNN` is a four-digit sequence number.
 - `type` is one of `spec`, `adr`, or `spike`.
 - `short-title` is a kebab-case label; `type` and `short-title` are joined by a hyphen.
+- `lifecycle` is `active` or `retired`.
 - The extension is `.md`.
+
+Use `.active.md` for current requirements, decisions, and investigations. Use `.retired.md` only for documents the user explicitly identifies as historical or replaced.
 
 Examples:
 
 ```text
-.worklog/0007.spec-console-rendering.md
-.worklog/0008.adr-double-buffering.md
-.worklog/0009.spike-terminal-flickering.md
+.worklog/0007.spec-console-rendering.active.md
+.worklog/0008.adr-double-buffering.active.md
+.worklog/0009.spike-terminal-flickering.retired.md
 ```
 
 ## Ordering
@@ -196,6 +199,7 @@ Do not reorder documents based on guessed importance.
 - Use normal filesystem move only for untracked files.
 - Do not edit document content unless the user explicitly asks to normalize sections.
 - Do not create numbered work documents for product-neutral small changes that belong in commit messages.
+- Do not create numbered work documents for micro-changes or changes fully explained by the diff and commit message.
 
 ## Safety rules
 
