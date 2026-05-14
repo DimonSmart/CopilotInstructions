@@ -48,6 +48,8 @@ Before implementation, make sure the document has:
 - done criteria;
 - verification plan.
 
-After implementation, update `Outcome`.
+After significant implementation, reconcile the work document with the actual result. Add or update `Outcome` only when there are deviations, important implementation notes, verification details, limitations, or follow-up work worth preserving.
+
+Do not use `Outcome` as task status. Do not retire a spec only because it was implemented.
 
 Do not add a numbered document for micro-changes, typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, dependency patches with no project-specific decision, or changes that do not affect the product as such. If a small change is fully explained by the diff and commit message, keep it out of `.worklog`.

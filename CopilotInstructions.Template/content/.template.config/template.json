@@ -198,12 +198,12 @@
             ".worklog/**",
             ".agents/skills/worklog-import/**",
             ".agents/skills/worklog-start/**",
-            ".agents/skills/worklog-close/**",
+            ".agents/skills/worklog-reconcile/**",
             ".agents/skills/worklog-review/**",
             ".claude/**",
             ".github/skills/worklog-import/**",
             ".github/skills/worklog-start/**",
-            ".github/skills/worklog-close/**",
+            ".github/skills/worklog-reconcile/**",
             ".github/skills/worklog-review/**"
           ]
         },

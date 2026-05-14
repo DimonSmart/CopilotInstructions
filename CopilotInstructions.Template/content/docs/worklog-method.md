@@ -76,6 +76,8 @@ There are no committed `draft`, `changed`, `deleted`, `outdated`, `superseded`, 
 
 The agent must use only `.active.md` files as the default work context.
 
+Implementation completion does not automatically retire a spec. A spec may stay `.active.md` after implementation if it still describes current intended behavior, requirements, decisions, or constraints.
+
 The agent may read `.retired.md` files only when:
 
 - a current document references them through `Replaces`;
@@ -89,7 +91,7 @@ When an active document needs substantial semantic changes:
 3. In each new document, add `Replaces:` with the old document number.
 4. Do not rewrite the semantic content of the retired document.
 
-Minor factual completion of an active work document is allowed only when it records the execution of that same document, for example updating `Outcome` after implementation. Do not change old requirements in place to mean something new.
+Minor factual completion of an active work document is allowed only when it records durable context about that same document without changing its requirement or decision. Do not change old requirements in place to mean something new.
 
 If a feature is removed from scope, retire the old feature spec and create a new active spec describing the current requirement that the feature is out of scope.
 
@@ -115,14 +117,39 @@ Every work document should have:
 - related documents;
 - goal;
 - context;
-- done criteria;
-- outcome.
+- done criteria.
 
-Specs should also record scope and non-goals. Spikes should record result and recommendation.
+Specs should also record scope and non-goals. For spikes, `Result` and `Recommendation` are required.
 
 When a new document replaces an older one, it must include:
 
 - `Replaces`.
+
+## Outcome
+
+`Outcome` is optional for `spec` and `adr`.
+
+Add `Outcome` only when the actual implementation or investigation produced durable engineering context that is not obvious from the final code, commits, pull request, or tests.
+
+Good reasons to add `Outcome`:
+
+- implementation differs from the original plan;
+- only part of the scope was implemented;
+- an important technical nuance appeared during implementation;
+- verification was partial or manual;
+- a limitation was discovered;
+- follow-up work should be preserved;
+- the original spec remains mostly valid, but a small nuance changes how it should be understood.
+
+Do not use `Outcome` to mark a spec as done.
+
+A spec may remain `.active.md` after implementation if it still describes current intended behavior.
+
+If the meaning of the requirement or decision changed substantially, do not patch it through `Outcome`. Retire the old document and create a new active document with `Replaces:`.
+
+Accepted ADR decisions must not be rewritten after acceptance. `Outcome` may record small execution notes only when they do not change the accepted decision.
+
+For `spike`, `Result` and `Recommendation` remain required.
 
 ## Agent Workflow
 
@@ -134,10 +161,10 @@ Before significant implementation:
 4. Confirm scope, non-goals, and done criteria.
 5. Implement only the described scope.
 
-After implementation:
+After significant implementation or investigation:
 
 1. Run verification commands.
-2. Update the `Outcome` section.
-3. Record deviations from the plan.
-4. Add follow-up items if needed.
+2. Reconcile the work document with the actual result.
+3. Decide whether no worklog update is needed, `Outcome` should be added or updated, or a new work document should replace the old one.
+4. Record deviations, limitations, partial verification, or follow-up only when they add durable context.
 5. Do not silently rewrite existing requirements or accepted ADRs.

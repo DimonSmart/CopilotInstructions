@@ -22,6 +22,8 @@ Use only `.active.md` files as current context. `.retired.md` files are history;
 
 When an active document needs substantial semantic changes, rename the old file to `.retired.md`, create one or more new `.active.md` documents with new numbers, and add `Replaces:` with the old document number in each new document. Do not rewrite the semantic content of retired documents.
 
-When completing work tracked by a work document, update its `Outcome` section with implementation summary, verification, deviations, and follow-up.
+After significant work tracked by a work document, reconcile the document with the actual result. Add or update `Outcome` only when the implementation, verification, deviations, limitations, or follow-up contain durable information that should remain visible in the repository.
+
+Do not use `Outcome` as task status. Do not retire a spec only because implementation is complete.
 
 Accepted ADRs and old requirements are immutable. If a decision or requirement changes, create a new active document and retire the old one.

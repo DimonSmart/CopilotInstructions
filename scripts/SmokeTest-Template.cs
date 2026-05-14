@@ -163,6 +163,8 @@ sealed class SmokeTestRunner
             MissingPaths:
             [
                 ".github",
+                ".agents/skills/worklog-close/SKILL.md",
+                ".claude/skills/worklog-close/SKILL.md",
             ],
             Contains: []),
         new(
@@ -195,15 +197,15 @@ sealed class SmokeTestRunner
                 ".worklog/_templates/spike.md",
                 ".agents/skills/worklog-import/SKILL.md",
                 ".agents/skills/worklog-start/SKILL.md",
-                ".agents/skills/worklog-close/SKILL.md",
+                ".agents/skills/worklog-reconcile/SKILL.md",
                 ".agents/skills/worklog-review/SKILL.md",
                 ".claude/skills/worklog-import/SKILL.md",
                 ".claude/skills/worklog-start/SKILL.md",
-                ".claude/skills/worklog-close/SKILL.md",
+                ".claude/skills/worklog-reconcile/SKILL.md",
                 ".claude/skills/worklog-review/SKILL.md",
                 ".github/skills/worklog-import/SKILL.md",
                 ".github/skills/worklog-start/SKILL.md",
-                ".github/skills/worklog-close/SKILL.md",
+                ".github/skills/worklog-reconcile/SKILL.md",
                 ".github/skills/worklog-review/SKILL.md",
             ],
             MissingPaths:
@@ -211,6 +213,9 @@ sealed class SmokeTestRunner
                 ".codex",
                 ".worklog/0001.spec-initial-mvp.active.md",
                 ".worklog/_templates/task.md",
+                ".agents/skills/worklog-close/SKILL.md",
+                ".claude/skills/worklog-close/SKILL.md",
+                ".github/skills/worklog-close/SKILL.md",
             ],
             Contains:
             [
@@ -226,8 +231,10 @@ sealed class SmokeTestRunner
                 ".worklog/_templates/spec.md",
                 ".agents/skills/worklog-import/SKILL.md",
                 ".agents/skills/worklog-start/SKILL.md",
+                ".agents/skills/worklog-reconcile/SKILL.md",
                 ".claude/skills/worklog-import/SKILL.md",
                 ".claude/skills/worklog-start/SKILL.md",
+                ".claude/skills/worklog-reconcile/SKILL.md",
             ],
             MissingPaths:
             [

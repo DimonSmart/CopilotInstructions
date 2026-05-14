@@ -38,6 +38,5 @@ Negative:
 
 ## Outcome
 
-Implementation summary:
-
-Follow-up:
+<!-- Optional. Add only for small execution notes that do not change the
+accepted decision. Do not use this section as task status. -->

@@ -115,7 +115,7 @@ Generate worklog methodology and skills:
 dotnet new copilot-instructions --with-worklog true
 ```
 
-This adds `.worklog/`, work document templates, and `worklog-start`, `worklog-import`, `worklog-close`, and `worklog-review` skills.
+This adds `.worklog/`, work document templates, and `worklog-start`, `worklog-import`, `worklog-reconcile`, and `worklog-review` skills.
 
 ## Updating the template
 

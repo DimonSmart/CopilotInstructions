@@ -6,7 +6,6 @@
     <Authors>DimonSmart</Authors>
     <PackageType>Template</PackageType>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <NoBuild>true</NoBuild>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
     <PackageLicenseExpression>0BSD</PackageLicenseExpression>
     <Description>Template that creates compact AI instructions for Copilot and Codex</Description>

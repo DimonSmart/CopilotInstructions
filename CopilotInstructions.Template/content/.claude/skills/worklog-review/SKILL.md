@@ -19,12 +19,14 @@ Check:
 2. If yes, does the document exist?
 3. Is the type correct: `spec`, `adr`, or `spike`?
 4. Is the numeric sequence correct?
-5. Does the document have clear Goal, Context, Done criteria, and Outcome?
-6. Does every work document use `.active.md` or `.retired.md`?
-7. Are retired documents excluded from current requirements unless referenced through `Replaces` or explicitly needed for history?
-8. If an old requirement or ADR changed, was the old active document renamed to `.retired.md` and the new active document given `Replaces:` with the old document number?
-9. Are accepted ADRs and old requirements left semantically immutable?
-10. Are micro-changes and product-neutral small changes kept out of `.worklog/` and left to commit messages?
+5. Does the document have clear Goal, Context, and done criteria?
+6. For `spec` and `adr`, if `Outcome` exists, does it add durable engineering context instead of task status?
+7. For `spike`, are `Result` and `Recommendation` present and meaningful?
+8. Does every work document use `.active.md` or `.retired.md`?
+9. Are retired documents excluded from current requirements unless referenced through `Replaces` or explicitly needed for history?
+10. If an old requirement or ADR changed, was the old active document renamed to `.retired.md` and the new active document given `Replaces:` with the old document number?
+11. Are accepted ADRs and old requirements left semantically immutable?
+12. Are micro-changes and product-neutral small changes kept out of `.worklog/` and left to commit messages?
 
 Output:
 

@@ -49,8 +49,6 @@ dotnet test
 
 ## Outcome
 
-Implementation summary:
-
-Deviations:
-
-Follow-up:
+<!-- Optional. Add after implementation only when there are deviations,
+important implementation notes, partial verification, limitations, or follow-up
+items worth preserving. Do not use this section as task status. -->
