@@ -88,7 +88,7 @@ After `SOURCE_FOLDER` is explicitly provided:
 
 1. Validate that `SOURCE_FOLDER` is accessible and contains supported documents.
 2. If invalid, stop and report the error.
-3. If valid, create `.worklog/` if it does not exist (this initial setup is permitted).
+3. If valid, create `.worklog/` and `.worklog/archive/` if they do not exist (this initial setup is permitted).
 4. Then proceed to the Read phase.
 
 ## Read
@@ -97,7 +97,7 @@ After validation and setup, read:
 
 1. `docs/worklog-method.md`
 2. `.worklog/README.md` if it exists
-3. existing numbered files in `.worklog/`
+3. existing numbered files in `.worklog/` and `.worklog/archive/`
 4. the folder specified by `SOURCE_FOLDER`
 
 If `docs/worklog-method.md` does not exist, report that the methodology file is missing and continue only with the available `.worklog` conventions.
@@ -108,12 +108,14 @@ If `docs/worklog-method.md` does not exist, report that the methodology file is 
 2. Include Markdown files by default.
 3. Include plain text files only if the user explicitly asks to import plain text or `.txt` files.
 4. Ignore generated files, binaries, images, archives, build artifacts, hidden dependency folders, and nested dependency folders.
-5. Determine the next `NNNN` number after existing numbered `.worklog` documents.
+5. Determine the next `NNNN` number after existing numbered `.worklog` and `.worklog/archive` documents.
 6. For each source document, choose one type: `spec`, `adr`, or `spike`.
 7. Create a short kebab-case title from the existing file name or document heading.
-8. Rename or move each document to `.worklog/NNNN.type-short-title.active.md` unless the user explicitly says it is historical.
-9. Preserve ordering by prioritizing explicit source numbering first, followed by dates. If neither is present, use stable path sort.
-10. Report the old path to new path mapping.
+8. Rename or move each current document to `.worklog/NNNN.type-short-title.md`.
+9. Rename or move each document the user explicitly identifies as historical or replaced to `.worklog/archive/NNNN.type-short-title.md`.
+10. Preserve ordering by prioritizing explicit source numbering first, followed by dates. If neither is present, use stable path sort.
+11. Report the old path to new path mapping.
+12. After import, update `.worklog/INDEX.md`.
 
 ## Supported source documents
 
@@ -156,7 +158,7 @@ Do not invent a classification only to complete the import.
 Target file name format:
 
 ```text
-.worklog/NNNN.type-short-title.lifecycle.md
+.worklog/NNNN.type-short-title.md
 ```
 
 Where:
@@ -164,18 +166,24 @@ Where:
 - `NNNN` is a four-digit sequence number.
 - `type` is one of `spec`, `adr`, or `spike`.
 - `short-title` is a kebab-case label; `type` and `short-title` are joined by a hyphen.
-- `lifecycle` is `active` or `retired`.
 - The extension is `.md`.
 
-Use `.active.md` for current requirements, decisions, and investigations. Use `.retired.md` only for documents the user explicitly identifies as historical or replaced.
+Use `.worklog/NNNN.type-short-title.md` for current requirements, decisions, and investigations.
+
+Use `.worklog/archive/NNNN.type-short-title.md` only for documents the user explicitly identifies as historical or replaced.
 
 Examples:
 
 ```text
-.worklog/0007.spec-console-rendering.active.md
-.worklog/0008.adr-double-buffering.active.md
-.worklog/0009.spike-terminal-flickering.retired.md
+.worklog/0007.spec-console-rendering.md
+.worklog/0008.adr-double-buffering.md
+.worklog/archive/0009.spike-terminal-flickering.md
 ```
+
+If importing from an older worklog format:
+
+- `NNNN.type-title.active.md` becomes `.worklog/NNNN.type-title.md`
+- `NNNN.type-title.retired.md` becomes `.worklog/archive/NNNN.type-title.md`
 
 ## Ordering
 
@@ -194,7 +202,7 @@ Do not reorder documents based on guessed importance.
 - If a target path already exists, keep the sequence number unique and choose the next available `NNNN`.
 - If two documents would produce the same short title, keep both by preserving their sequence numbers.
 - Do not add vague suffixes unless needed to avoid a path collision.
-- If a source document is already correctly named and already located in `.worklog`, leave it unchanged.
+- If a source document is already correctly named and already located in `.worklog/` or `.worklog/archive/`, leave it unchanged.
 - Prefer `git mv` for tracked files.
 - Use normal filesystem move only for untracked files.
 - Do not edit document content unless the user explicitly asks to normalize sections.

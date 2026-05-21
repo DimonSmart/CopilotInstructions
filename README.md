@@ -17,7 +17,7 @@ and stays lightweight enough for a normal `dotnet new` workflow.
   - `.github/skills/*/SKILL.md` (Copilot project-local skills)
   - `AGENTS.md` (Codex entry point)
 - Optional path-specific GitHub Copilot instructions in `.github/instructions/`.
-- Optional worklog-driven development files with `/.worklog`, templates, and project-local skills.
+- Optional worklog-driven development files with `.worklog`, archive, index, templates, and project-local skills.
 - Optional switches:
   - `--no-codex` (skip `AGENTS.md`, companion agent files, and Codex/Claude skills)
   - `--no-copilot` (skip `.github/copilot-instructions.md`)
@@ -68,6 +68,9 @@ docs/
 
 .worklog/                 # with --with-worklog true
   _templates/
+  archive/
+  INDEX.md
+  README.md
 
 AGENTS.md
 ```
@@ -115,7 +118,9 @@ Generate worklog methodology and skills:
 dotnet new copilot-instructions --with-worklog true
 ```
 
-This adds `.worklog/`, work document templates, and `worklog-start`, `worklog-import`, `worklog-reconcile`, and `worklog-review` skills.
+This adds `.worklog/`, `.worklog/archive/`, `.worklog/INDEX.md`, work document templates, and `worklog-start`, `worklog-import`, `worklog-reconcile`, `worklog-review`, and `worklog-index` skills.
+
+Worklog documents use `NNNN.type-short-title.md` directly under `.worklog/` for current documents, and the same naming under `.worklog/archive/` for archived history. File names do not include active or retired lifecycle markers.
 
 ## Updating the template
 

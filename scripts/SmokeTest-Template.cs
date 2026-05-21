@@ -192,18 +192,23 @@ sealed class SmokeTestRunner
                 "docs/worklog-method.md",
                 "docs/ai-context/packs/worklog.md",
                 ".worklog/README.md",
+                ".worklog/INDEX.md",
+                ".worklog/archive",
                 ".worklog/_templates/spec.md",
                 ".worklog/_templates/adr.md",
                 ".worklog/_templates/spike.md",
                 ".agents/skills/worklog-import/SKILL.md",
+                ".agents/skills/worklog-index/SKILL.md",
                 ".agents/skills/worklog-start/SKILL.md",
                 ".agents/skills/worklog-reconcile/SKILL.md",
                 ".agents/skills/worklog-review/SKILL.md",
                 ".claude/skills/worklog-import/SKILL.md",
+                ".claude/skills/worklog-index/SKILL.md",
                 ".claude/skills/worklog-start/SKILL.md",
                 ".claude/skills/worklog-reconcile/SKILL.md",
                 ".claude/skills/worklog-review/SKILL.md",
                 ".github/skills/worklog-import/SKILL.md",
+                ".github/skills/worklog-index/SKILL.md",
                 ".github/skills/worklog-start/SKILL.md",
                 ".github/skills/worklog-reconcile/SKILL.md",
                 ".github/skills/worklog-review/SKILL.md",
@@ -211,7 +216,6 @@ sealed class SmokeTestRunner
             MissingPaths:
             [
                 ".codex",
-                ".worklog/0001.spec-initial-mvp.active.md",
                 ".worklog/_templates/task.md",
                 ".agents/skills/worklog-close/SKILL.md",
                 ".claude/skills/worklog-close/SKILL.md",
@@ -220,7 +224,10 @@ sealed class SmokeTestRunner
             Contains:
             [
                 new ContentExpectation("docs/ai-context/packs/worklog.md", "docs/worklog-method.md"),
+                new ContentExpectation(".worklog/INDEX.md", "numbered worklog documents are the source of truth"),
                 new ContentExpectation(".agents/skills/worklog-start/SKILL.md", ".worklog/_templates/"),
+                new ContentExpectation(".agents/skills/worklog-start/SKILL.md", "NNNN.type-short-title.md"),
+                new ContentExpectation(".agents/skills/worklog-index/SKILL.md", ".worklog/INDEX.md"),
             ]),
         new(
             "with-worklog-no-copilot",
@@ -228,13 +235,20 @@ sealed class SmokeTestRunner
             ExistingPaths:
             [
                 "docs/worklog-method.md",
+                ".worklog/README.md",
+                ".worklog/INDEX.md",
+                ".worklog/archive",
                 ".worklog/_templates/spec.md",
                 ".agents/skills/worklog-import/SKILL.md",
+                ".agents/skills/worklog-index/SKILL.md",
                 ".agents/skills/worklog-start/SKILL.md",
                 ".agents/skills/worklog-reconcile/SKILL.md",
+                ".agents/skills/worklog-review/SKILL.md",
                 ".claude/skills/worklog-import/SKILL.md",
+                ".claude/skills/worklog-index/SKILL.md",
                 ".claude/skills/worklog-start/SKILL.md",
                 ".claude/skills/worklog-reconcile/SKILL.md",
+                ".claude/skills/worklog-review/SKILL.md",
             ],
             MissingPaths:
             [

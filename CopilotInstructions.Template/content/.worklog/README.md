@@ -1,17 +1,18 @@
 # Worklog
 
-This directory contains the project worklog.
+Current work documents live directly in this directory.
 
-Small product-neutral changes and fixes are described in commit messages, not here.
+Archived historical documents live in `archive/`.
 
-Use one increasing sequence for all significant work documents:
+Use one increasing sequence for all work documents:
 
-`NNNN.type-short-title.lifecycle.md`
+`NNNN.type-short-title.md`
 
-Lifecycle suffixes:
+Examples:
 
-- `.active.md` - current source of requirements, decisions, or constraints.
-- `.retired.md` - historical document. Do not use it as current requirements.
+- `0001.spec-initial-mvp.md`
+- `0002.adr-console-rendering.md`
+- `archive/0003.spike-old-renderer.md`
 
 Draft documents are not committed to the main branch.
 
@@ -23,14 +24,17 @@ Types:
 
 There is no `task` worklog type. Small local changes belong in commit messages unless they require a `spec`, `adr`, or `spike`.
 
-Use only `.active.md` files as default work context. Read `.retired.md` files only for explicit history questions, decision explanation, or when an active document references them through `Replaces`.
+Do not use recursive `.worklog/**/*.md` as current context.
+Use only numbered files directly under `.worklog/`.
 
-When an active document needs substantial semantic changes:
+Read archived files only for explicit history questions, decision explanation, replacement links, reconcile work, or index maintenance.
 
-1. Rename the old file from `.active.md` to `.retired.md`.
-2. Create one or more new `.active.md` documents with new numbers.
+When a current document needs substantial semantic changes:
+
+1. Move the old file from `.worklog/` to `.worklog/archive/`.
+2. Create one or more new current documents in `.worklog/` with new numbers.
 3. In each new document, add `Replaces:` with the old document number.
-4. Do not rewrite the semantic content of the retired document.
+4. Do not rewrite the semantic content of the archived document.
 
 References use document numbers only, not filenames.
 
@@ -50,6 +54,6 @@ Before implementation, make sure the document has:
 
 After significant implementation, reconcile the work document with the actual result. Add or update `Outcome` only when there are deviations, important implementation notes, verification details, limitations, or follow-up work worth preserving.
 
-Do not use `Outcome` as task status. Do not retire a spec only because it was implemented.
+Do not use `Outcome` as task status. Do not archive a spec only because it was implemented.
 
 Do not add a numbered document for micro-changes, typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, dependency patches with no project-specific decision, or changes that do not affect the product as such. If a small change is fully explained by the diff and commit message, keep it out of `.worklog`.

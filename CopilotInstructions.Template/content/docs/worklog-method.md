@@ -6,23 +6,33 @@ Keep project intent, decisions, experiments, and significant changes in reposito
 
 The worklog is not a replacement for commits. It records meaningful engineering intent.
 
-Small product-neutral changes belong in commit messages, not in `/.worklog`.
+Small product-neutral changes belong in commit messages, not in `.worklog`.
 
 ## Directory
 
-All work documents live in `/.worklog`.
+All work documents live in `.worklog`.
 
-Use one increasing numeric sequence:
+Current documents live directly in `.worklog/`.
 
-`NNNN.type-short-title.lifecycle.md`
+Retired documents live in `.worklog/archive/`.
+
+Use one increasing numeric sequence across both current and archived documents:
+
+`NNNN.type-short-title.md`
 
 Examples:
 
-- `0001.spec-initial-mvp.active.md`
-- `0002.spike-console-double-buffering.active.md`
-- `0003.adr-use-console-frame-buffer.retired.md`
+- `.worklog/0001.spec-initial-mvp.md`
+- `.worklog/0002.spike-console-double-buffering.md`
+- `.worklog/archive/0003.adr-old-rendering-model.md`
+
+Do not include lifecycle markers such as `active` or `retired` in file names.
 
 Do not split documents into `/specs`, `/adr`, or `/spikes`. The sequence matters more than classification folders.
+
+When finding the next number, scan numbered worklog files in both `.worklog/` and `.worklog/archive/`, then use the maximum `NNNN` prefix plus one.
+
+Ignore support files such as `.worklog/README.md`, `.worklog/INDEX.md`, `.worklog/_templates/*.md`, and `.worklog/archive/README.md`.
 
 ## Document Types
 
@@ -38,7 +48,7 @@ Use `adr` for architectural or long-lived technical decisions.
 
 Question answered: why did we choose this solution?
 
-ADRs are immutable once they describe an accepted decision. If the decision changes, create a new ADR and retire the old one.
+ADRs are immutable once they describe an accepted decision. If the decision changes, create a new ADR and archive the old one.
 
 ### spike
 
@@ -65,35 +75,38 @@ When unsure whether a small change deserves a work document, do not create one b
 
 There is no `task` work document type. Small local tasks stay in commit messages unless they are really a `spec`, `adr`, or `spike`.
 
-## Active And Retired Documents
+## Current And Archived Documents
 
-Worklog documents use lifecycle suffixes in filenames:
+A document is current when it is stored directly under `.worklog/`.
 
-- `.active.md` - current source of requirements, decisions, or constraints.
-- `.retired.md` - historical document. Do not use it as current requirements.
+A document is archived when it is stored under `.worklog/archive/`.
 
-There are no committed `draft`, `changed`, `deleted`, `outdated`, `superseded`, or `archived` work documents. Drafts live outside the main branch or remain uncommitted.
+There are no committed filename states named `draft`, `changed`, `deleted`, `outdated`, or `superseded`. Archived history is represented by location under `.worklog/archive/`, not by a filename state. Drafts live outside the main branch or remain uncommitted.
 
-The agent must use only `.active.md` files as the default work context.
+The agent must use only numbered current documents in `.worklog/` as the default work context.
 
-Implementation completion does not automatically retire a spec. A spec may stay `.active.md` after implementation if it still describes current intended behavior, requirements, decisions, or constraints.
+The agent must not use recursive `.worklog/**/*.md` search as current context, because it includes archived documents and support files.
 
-The agent may read `.retired.md` files only when:
+Implementation completion does not automatically archive a spec. A spec may stay current after implementation if it still describes current intended behavior, requirements, decisions, or constraints.
+
+Archived documents are historical. Read them only when:
 
 - a current document references them through `Replaces`;
 - the user explicitly asks to inspect history;
-- the task is to explain why a decision was made.
+- the task is to explain why a decision was made;
+- `worklog-reconcile` compares old and new meaning;
+- `worklog-index` updates links and replacement history.
 
-When an active document needs substantial semantic changes:
+When a current document needs substantial semantic changes:
 
-1. Rename the old file from `.active.md` to `.retired.md`.
-2. Create one or more new `.active.md` documents with new numbers.
+1. Move the old file from `.worklog/` to `.worklog/archive/`.
+2. Create one or more new current documents in `.worklog/` with new numbers.
 3. In each new document, add `Replaces:` with the old document number.
-4. Do not rewrite the semantic content of the retired document.
+4. Do not rewrite the semantic content of the archived document.
 
-Minor factual completion of an active work document is allowed only when it records durable context about that same document without changing its requirement or decision. Do not change old requirements in place to mean something new.
+Minor factual completion of a current work document is allowed only when it records durable context about that same document without changing its requirement or decision. Do not change old requirements in place to mean something new.
 
-If a feature is removed from scope, retire the old feature spec and create a new active spec describing the current requirement that the feature is out of scope.
+If a feature is removed from scope, archive the old feature spec and create a new current spec describing the current requirement that the feature is out of scope.
 
 References use document numbers only:
 
@@ -106,7 +119,7 @@ Related:
 - 0007
 ```
 
-Do not reference work documents by filename in `Replaces` or `Related`; filenames can change when lifecycle changes.
+Do not reference work documents by filename in `Replaces` or `Related`; filenames can change when a document is archived.
 
 ## Required Sections
 
@@ -143,9 +156,9 @@ Good reasons to add `Outcome`:
 
 Do not use `Outcome` to mark a spec as done.
 
-A spec may remain `.active.md` after implementation if it still describes current intended behavior.
+A spec may remain current after implementation if it still describes current intended behavior.
 
-If the meaning of the requirement or decision changed substantially, do not patch it through `Outcome`. Retire the old document and create a new active document with `Replaces:`.
+If the meaning of the requirement or decision changed substantially, do not patch it through `Outcome`. Archive the old document and create a new current document with `Replaces:`.
 
 Accepted ADR decisions must not be rewritten after acceptance. `Outcome` may record small execution notes only when they do not change the accepted decision.
 
@@ -155,9 +168,9 @@ For `spike`, `Result` and `Recommendation` remain required.
 
 Before significant implementation:
 
-1. Read active `/.worklog/*.active.md` documents relevant to the task.
+1. Read numbered current `.worklog/NNNN.*.md` documents relevant to the task.
 2. Decide whether a new work document is needed.
-3. If needed, create the next numbered document from `/.worklog/_templates`.
+3. If needed, create the next numbered document from `.worklog/_templates`.
 4. Confirm scope, non-goals, and done criteria.
 5. Implement only the described scope.
 
