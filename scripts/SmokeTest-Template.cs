@@ -224,9 +224,13 @@ sealed class SmokeTestRunner
             Contains:
             [
                 new ContentExpectation("docs/ai-context/packs/worklog.md", "docs/worklog-method.md"),
+                new ContentExpectation("docs/worklog-method.md", "Non-semantic Edits To Existing Work Documents"),
+                new ContentExpectation(".worklog/_templates/spec.md", "Shared behavior"),
                 new ContentExpectation(".worklog/INDEX.md", "numbered worklog documents are the source of truth"),
                 new ContentExpectation(".agents/skills/worklog-start/SKILL.md", ".worklog/_templates/"),
                 new ContentExpectation(".agents/skills/worklog-start/SKILL.md", "NNNN.type-short-title.md"),
+                new ContentExpectation(".agents/skills/worklog-review/SKILL.md", "Potential semantic change hidden as cleanup"),
+                new ContentExpectation(".agents/skills/worklog-reconcile/SKILL.md", "Non-semantic cleanup needed"),
                 new ContentExpectation(".agents/skills/worklog-index/SKILL.md", ".worklog/INDEX.md"),
             ]),
         new(

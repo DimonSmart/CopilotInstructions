@@ -31,6 +31,17 @@ Check:
 14. If an old requirement or ADR changed, was the old document moved to `.worklog/archive/` and the new current document given `Replaces:`?
 15. Are accepted ADRs and old requirements left semantically immutable?
 16. Are micro-changes and product-neutral small changes kept out of `.worklog/` and left to commit messages?
+17. Are product-neutral dependency updates, library API migrations, executor/source-generator style changes, and framework idiom alignment kept out of `spec` documents when behavior, domain contracts, and architecture decisions stay the same?
+
+Non-semantic edit checks:
+
+1. Did the change modify existing work documents?
+2. If yes, are those edits non-semantic?
+3. Do they preserve required behavior, scope, non-goals, constraints, and done criteria?
+4. Were duplicated shared behaviors removed without changing feature-specific behavior?
+5. Were references to shared specs added in plain text without introducing new requirements?
+6. If a document was archived and replaced, was there a real semantic change that justified replacement?
+7. If there was only cleanup, was the document kept in place instead of archived?
 
 Legacy migration check:
 
@@ -47,4 +58,23 @@ Output:
 
 - `OK` if the structure is fine.
 - Otherwise list concrete fixes.
+- If a semantic change appears hidden as cleanup, report it in this form:
+
+```text
+Potential semantic change hidden as cleanup:
+- document: 0015.spec-search-options.md
+- changed behavior: Esc handling changed from closing the dialog to ignoring Esc during validation
+- suggested action: create a new work document or ask the user
+```
+
+- If cleanup-only work is valid, report it in this form when useful:
+
+```text
+Cleanup-only edit detected:
+- document: 0010.spec-copy-conflict.md
+- duplicated dialog behavior was replaced with a reference to 0027
+- behavior appears preserved
+- no replacement spec needed
+```
+
 - Do not modify files unless the user asks.

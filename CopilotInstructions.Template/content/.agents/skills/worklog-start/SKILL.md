@@ -34,16 +34,25 @@ Task:
    - do not rewrite the semantic content of the archived document.
 6. After creating a work document, update `.worklog/INDEX.md` or tell the user that `worklog-index` should be run.
 
+Shared spec extraction:
+
+- If a shared spec is created from duplicated behavior, existing specs that duplicated that behavior may be edited in place to remove duplication and reference the new shared spec in plain text.
+- Do not create replacement specs for existing documents when the cleanup preserves behavior.
+- Ask the user before extracting shared behavior if the extraction changes ownership of behavior or affects how future specs should be written.
+
 Rules:
 
 - Do not implement code in this skill unless the user explicitly asks to continue after the document is created.
 - Do not create a work document for micro-changes or small product-neutral changes or fixes that are fully captured by a commit message.
+- Do not create a `spec` for product-neutral technical chores such as dependency updates, library API migrations, executor/source-generator style changes, or framework idiom alignment when behavior, domain contracts, and architecture decisions stay the same.
 - Do not create `task` work documents; small local tasks belong in commit messages unless they are really a `spec`, `adr`, or `spike`.
 - Keep typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, dependency patches with no project-specific decision, and changes with no changed requirement out of `.worklog/`.
 - When unsure about a small change, do not create a work document by default.
 - Use only numbered files directly under `.worklog/` as current context. Files under `.worklog/archive/` are history.
 - Do not include lifecycle markers such as `active` or `retired` in file names.
 - Do not create documents inside `.worklog/archive/` unless importing or archiving historical documents.
+- Before modifying an existing work document in place, verify that the change is non-semantic.
+- If the change would alter intended behavior, scope, non-goals, constraints, done criteria, or architectural meaning, do not edit it as cleanup.
 - Do not invent requirements.
 - If important information is missing, mark it as `TBD` instead of guessing.
 - Keep the document useful for a coding agent, not just for a human reader.

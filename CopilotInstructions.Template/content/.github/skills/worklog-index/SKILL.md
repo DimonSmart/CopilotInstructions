@@ -39,7 +39,8 @@ Task:
 7. Summarize each document in one short sentence.
 8. Include `Related`, `Replaces`, and `Replaced by` references when present.
 9. Detect broken document number references.
-10. Report inconsistencies instead of silently guessing.
+10. Detect shared specs and specs that reference them in prose.
+11. Report inconsistencies instead of silently guessing.
 
 Rules:
 
@@ -48,6 +49,9 @@ Rules:
 - Do not rewrite requirements, accepted ADRs, or archived documents.
 - Do not include micro-changes, local task notes, or commit-level details.
 - Do not use archived documents as current requirements.
+- If shared behavior was extracted, the index may reflect the new shared spec without requiring replacement documents for specs that were cleaned up in place.
+- The index is not proof that behavior changed.
+- Do not infer semantic changes only from references being added or duplicated text being removed.
 - If a document is hard to summarize safely, write `TBD` in the summary and report it.
 
 Output:

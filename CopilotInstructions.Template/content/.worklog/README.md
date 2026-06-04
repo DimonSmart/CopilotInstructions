@@ -36,6 +36,12 @@ When a current document needs substantial semantic changes:
 3. In each new document, add `Replaces:` with the old document number.
 4. Do not rewrite the semantic content of the archived document.
 
+Existing work documents may be edited in place for non-semantic cleanup.
+
+Non-semantic cleanup preserves required behavior, decisions, scope, non-goals, constraints, and done criteria.
+
+Do not archive and replace a document only because duplicated behavior was extracted into a shared spec or wording was cleaned up.
+
 References use document numbers only, not filenames.
 
 Do not split documents into separate folders by type.
@@ -57,3 +63,5 @@ After significant implementation, reconcile the work document with the actual re
 Do not use `Outcome` as task status. Do not archive a spec only because it was implemented.
 
 Do not add a numbered document for micro-changes, typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, dependency patches with no project-specific decision, or changes that do not affect the product as such. If a small change is fully explained by the diff and commit message, keep it out of `.worklog`.
+
+Do not create a `spec` for product-neutral dependency updates, library API migrations, executor/source-generator style changes, or framework idiom alignment when behavior, domain contracts, and architecture decisions stay the same.

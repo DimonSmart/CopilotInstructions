@@ -42,6 +42,8 @@ Use `spec` when the system gets a new capability or user-visible behavior change
 
 Question answered: what should the system do?
 
+Do not use `spec` for product-neutral technical chores such as dependency updates, API-style migrations, executor/source-generator style changes, or framework idiom alignment when the product behavior, domain contracts, and architecture decision stay the same.
+
 ### adr
 
 Use `adr` for architectural or long-lived technical decisions.
@@ -66,10 +68,13 @@ Do not create a numbered work document for:
 - obvious bug fixes fully explained by the commit message;
 - small refactoring with no behavior or architectural meaning;
 - dependency patch updates with no project-specific decision.
+- product-neutral library API migrations or framework-style follow-ups that keep the same behavior and domain contracts.
 
 Also do not create a work document for small changes or fixes that do not affect the product as such: no architecture change, no library choice, no experiment, no new capability, no changed requirement, and no user-visible behavior change. Describe those changes at the commit-message level.
 
 If the change is completely understandable from a diff and a commit message, keep it out of `.worklog`.
+
+Library updates need a work document only when the project makes a durable choice, accepts a changed architecture or contract, runs a real investigation, or changes user-visible behavior. A follow-up to rewrite code to the newer library idiom is not enough by itself.
 
 When unsure whether a small change deserves a work document, do not create one by default. Create a document only when the change needs durable requirements, decision history, or investigation notes.
 
@@ -97,12 +102,20 @@ Archived documents are historical. Read them only when:
 - `worklog-reconcile` compares old and new meaning;
 - `worklog-index` updates links and replacement history.
 
+If an edit changes intended behavior, architectural meaning, scope, non-goals, constraints, compatibility, or done criteria, it is semantic.
+
+Do not hide semantic changes as cleanup.
+
 When a current document needs substantial semantic changes:
 
 1. Move the old file from `.worklog/` to `.worklog/archive/`.
 2. Create one or more new current documents in `.worklog/` with new numbers.
-3. In each new document, add `Replaces:` with the old document number.
+3. In the new document, explain that it replaces or supersedes the old document.
 4. Do not rewrite the semantic content of the archived document.
+
+Do not archive and replace a current document only because duplicated text was extracted into a shared spec.
+
+Archive and replace only when the intended behavior, decision, scope, non-goals, constraints, or done criteria changed substantially.
 
 Minor factual completion of a current work document is allowed only when it records durable context about that same document without changing its requirement or decision. Do not change old requirements in place to mean something new.
 
@@ -120,6 +133,95 @@ Related:
 ```
 
 Do not reference work documents by filename in `Replaces` or `Related`; filenames can change when a document is archived.
+
+## Non-semantic Edits To Existing Work Documents
+
+A work document may be edited in place when the edit is non-semantic.
+
+A non-semantic edit preserves the required behavior, accepted decision, scope, non-goals, constraints, and done criteria.
+
+Non-semantic edits are behavior-preserving changes that improve the document without changing what the system is expected to do.
+
+Examples:
+
+- removing duplicated behavior after extracting a shared spec;
+- adding a plain-text reference to a shared spec;
+- improving wording without changing meaning;
+- fixing terminology;
+- restructuring sections;
+- fixing typos or incorrect names;
+- aligning the document with already existing implemented behavior, when this does not introduce a new requirement;
+- clarifying intent that was already implied by the existing document and implementation.
+
+When a shared spec is extracted from duplicated behavior, existing specs may be edited in place to remove duplicated common behavior and reference the new shared spec, as long as their intended feature behavior does not change.
+
+Do not create replacement documents for purely non-semantic edits.
+
+Before editing an existing work document in place, ask:
+
+After this edit, should a coding agent implement the same behavior as before?
+
+If yes, the edit is probably non-semantic and may be done in place.
+
+If no, or if the answer is unclear, treat the edit as semantic or ask the user.
+
+If the edit changes what future coding agents should build, preserve, avoid, or verify, it is probably semantic.
+
+If the edit only changes how existing intent is organized or referenced, it is probably non-semantic.
+
+When a shared spec is created from behavior duplicated across existing specs, the existing specs may be cleaned up in place.
+
+The cleanup may:
+
+- remove duplicated common behavior;
+- add a plain-text reference to the new shared spec by number;
+- keep only feature-specific details;
+- clarify that the shared spec owns the common behavior.
+
+This cleanup must not change the feature-specific behavior of the existing specs.
+
+Example:
+
+```md
+## Shared behavior
+
+Common dialog window behavior is defined by 0027.
+
+This specification only defines:
+
+- conflict-specific message text;
+- available conflict actions;
+- default selected action;
+- result returned to the copy operation.
+```
+
+Do not use non-semantic cleanup to change behavior.
+
+The following changes are semantic and require a new work document or explicit user confirmation:
+
+- changing user-visible behavior;
+- changing keyboard or mouse semantics;
+- changing validation rules;
+- changing default actions;
+- changing compatibility expectations;
+- changing scope or non-goals;
+- changing done criteria;
+- changing accepted ADR decisions;
+- removing a requirement as obsolete;
+- adding a new requirement;
+- changing a constraint that future agents must follow.
+
+Example:
+
+```text
+Old behavior:
+Esc closes the dialog.
+
+New behavior:
+Esc is ignored when the dialog has validation errors.
+```
+
+This is a semantic change. It must not be presented as simple spec cleanup.
 
 ## Required Sections
 
