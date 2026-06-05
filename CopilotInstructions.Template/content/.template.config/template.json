@@ -54,7 +54,13 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Create worklog methodology, templates, and worklog skills"
+      "description": "Legacy alias for --with-spec-guided-dev"
+    },
+    "with-spec-guided-dev": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Create Spec Guided Dev methodology, .specs templates, deviations, and spec skills"
     },
     "packs": {
       "type": "parameter",
@@ -83,6 +89,10 @@
     "withWorklog": {
       "type": "computed",
       "value": "(with-worklog)"
+    },
+    "withSpecGuidedDev": {
+      "type": "computed",
+      "value": "(with-spec-guided-dev || withWorklog)"
     },
     "includeLibraryPackByName": {
       "type": "generated",
@@ -191,22 +201,22 @@
           "exclude": [ ".agents/**", ".claude/**" ]
         },
         {
-          "condition": "(!withWorklog)",
+          "condition": "(!withSpecGuidedDev)",
           "exclude": [
-            "docs/worklog-method.md",
-            "docs/ai-context/packs/worklog.md",
-            ".worklog/**",
-            ".agents/skills/worklog-import/**",
-            ".agents/skills/worklog-index/**",
-            ".agents/skills/worklog-start/**",
-            ".agents/skills/worklog-reconcile/**",
-            ".agents/skills/worklog-review/**",
+            "docs/spec-guided-dev-method.md",
+            "docs/ai-context/packs/spec-guided-dev.md",
+            ".specs/**",
+            ".agents/skills/spec-import/**",
+            ".agents/skills/spec-index/**",
+            ".agents/skills/spec-start/**",
+            ".agents/skills/spec-reconcile/**",
+            ".agents/skills/spec-review/**",
             ".claude/**",
-            ".github/skills/worklog-import/**",
-            ".github/skills/worklog-index/**",
-            ".github/skills/worklog-start/**",
-            ".github/skills/worklog-reconcile/**",
-            ".github/skills/worklog-review/**"
+            ".github/skills/spec-import/**",
+            ".github/skills/spec-index/**",
+            ".github/skills/spec-start/**",
+            ".github/skills/spec-reconcile/**",
+            ".github/skills/spec-review/**"
           ]
         },
         {

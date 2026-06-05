@@ -143,8 +143,8 @@ sealed class SmokeTestRunner
                 ".claude",
                 ".github/instructions",
                 "docs/ai-context/packs",
-                "docs/worklog-method.md",
-                ".worklog",
+                "docs/spec-guided-dev-method.md",
+                ".specs",
             ],
             Contains:
             [
@@ -163,8 +163,8 @@ sealed class SmokeTestRunner
             MissingPaths:
             [
                 ".github",
-                ".agents/skills/worklog-close/SKILL.md",
-                ".claude/skills/worklog-close/SKILL.md",
+                ".agents/skills/spec-close/SKILL.md",
+                ".claude/skills/spec-close/SKILL.md",
             ],
             Contains: []),
         new(
@@ -185,78 +185,122 @@ sealed class SmokeTestRunner
             ],
             Contains: []),
         new(
-            "with-worklog",
-            ["--with-worklog", "true"],
+            "with-spec-guided-dev",
+            ["--with-spec-guided-dev", "true"],
             ExistingPaths:
             [
-                "docs/worklog-method.md",
-                "docs/ai-context/packs/worklog.md",
-                ".worklog/README.md",
-                ".worklog/INDEX.md",
-                ".worklog/archive",
-                ".worklog/_templates/spec.md",
-                ".worklog/_templates/adr.md",
-                ".worklog/_templates/spike.md",
-                ".agents/skills/worklog-import/SKILL.md",
-                ".agents/skills/worklog-index/SKILL.md",
-                ".agents/skills/worklog-start/SKILL.md",
-                ".agents/skills/worklog-reconcile/SKILL.md",
-                ".agents/skills/worklog-review/SKILL.md",
-                ".claude/skills/worklog-import/SKILL.md",
-                ".claude/skills/worklog-index/SKILL.md",
-                ".claude/skills/worklog-start/SKILL.md",
-                ".claude/skills/worklog-reconcile/SKILL.md",
-                ".claude/skills/worklog-review/SKILL.md",
-                ".github/skills/worklog-import/SKILL.md",
-                ".github/skills/worklog-index/SKILL.md",
-                ".github/skills/worklog-start/SKILL.md",
-                ".github/skills/worklog-reconcile/SKILL.md",
-                ".github/skills/worklog-review/SKILL.md",
+                "docs/spec-guided-dev-method.md",
+                "docs/ai-context/packs/spec-guided-dev.md",
+                ".specs/README.md",
+                ".specs/INDEX.md",
+                ".specs/archive",
+                ".specs/deviations",
+                ".specs/_templates/spec.md",
+                ".specs/_templates/adr.md",
+                ".specs/_templates/spike.md",
+                ".specs/_templates/deviation.md",
+                ".agents/skills/spec-import/SKILL.md",
+                ".agents/skills/spec-index/SKILL.md",
+                ".agents/skills/spec-start/SKILL.md",
+                ".agents/skills/spec-reconcile/SKILL.md",
+                ".agents/skills/spec-review/SKILL.md",
+                ".claude/skills/spec-import/SKILL.md",
+                ".claude/skills/spec-index/SKILL.md",
+                ".claude/skills/spec-start/SKILL.md",
+                ".claude/skills/spec-reconcile/SKILL.md",
+                ".claude/skills/spec-review/SKILL.md",
+                ".github/skills/spec-import/SKILL.md",
+                ".github/skills/spec-index/SKILL.md",
+                ".github/skills/spec-start/SKILL.md",
+                ".github/skills/spec-reconcile/SKILL.md",
+                ".github/skills/spec-review/SKILL.md",
             ],
             MissingPaths:
             [
                 ".codex",
-                ".worklog/_templates/task.md",
-                ".agents/skills/worklog-close/SKILL.md",
-                ".claude/skills/worklog-close/SKILL.md",
-                ".github/skills/worklog-close/SKILL.md",
+                ".worklog",
+                ".specs/deviations/archive",
+                ".specs/_templates/task.md",
+                ".agents/skills/worklog-start/SKILL.md",
+                ".claude/skills/worklog-start/SKILL.md",
+                ".github/skills/worklog-start/SKILL.md",
+                ".agents/skills/spec-close/SKILL.md",
+                ".claude/skills/spec-close/SKILL.md",
+                ".github/skills/spec-close/SKILL.md",
             ],
             Contains:
             [
-                new ContentExpectation("docs/ai-context/packs/worklog.md", "docs/worklog-method.md"),
-                new ContentExpectation("docs/worklog-method.md", "Non-semantic Edits To Existing Work Documents"),
-                new ContentExpectation(".worklog/_templates/spec.md", "Shared behavior"),
-                new ContentExpectation(".worklog/INDEX.md", "numbered worklog documents are the source of truth"),
-                new ContentExpectation(".agents/skills/worklog-start/SKILL.md", ".worklog/_templates/"),
-                new ContentExpectation(".agents/skills/worklog-start/SKILL.md", "NNNN.type-short-title.md"),
-                new ContentExpectation(".agents/skills/worklog-review/SKILL.md", "Potential semantic change hidden as cleanup"),
-                new ContentExpectation(".agents/skills/worklog-reconcile/SKILL.md", "Non-semantic cleanup needed"),
-                new ContentExpectation(".agents/skills/worklog-index/SKILL.md", ".worklog/INDEX.md"),
+                new ContentExpectation("docs/ai-context/packs/spec-guided-dev.md", "docs/spec-guided-dev-method.md"),
+                new ContentExpectation("docs/spec-guided-dev-method.md", "Spec Guided Dev is an AI-assisted development method"),
+                new ContentExpectation("docs/spec-guided-dev-method.md", "Why Specifications Are Numbered"),
+                new ContentExpectation(".specs/_templates/spec.md", "## Specification"),
+                new ContentExpectation(".specs/_templates/deviation.md", "Type: deviation"),
+                new ContentExpectation(".specs/INDEX.md", "numbered spec documents are the source of truth"),
+                new ContentExpectation(".agents/skills/spec-start/SKILL.md", ".specs/_templates/"),
+                new ContentExpectation(".agents/skills/spec-start/SKILL.md", "NNNN.type-short-title.md"),
+                new ContentExpectation(".agents/skills/spec-review/SKILL.md", "Potential semantic change hidden as cleanup"),
+                new ContentExpectation(".agents/skills/spec-reconcile/SKILL.md", "Non-semantic cleanup needed"),
+                new ContentExpectation(".agents/skills/spec-index/SKILL.md", ".specs/INDEX.md"),
             ]),
         new(
-            "with-worklog-no-copilot",
-            ["--with-worklog", "true", "--no-copilot", "true"],
+            "with-worklog-legacy",
+            ["--with-worklog", "true"],
             ExistingPaths:
             [
+                "docs/spec-guided-dev-method.md",
+                "docs/ai-context/packs/spec-guided-dev.md",
+                ".specs/README.md",
+                ".specs/INDEX.md",
+                ".specs/archive",
+                ".specs/deviations",
+                ".specs/_templates/spec.md",
+                ".specs/_templates/adr.md",
+                ".specs/_templates/spike.md",
+                ".specs/_templates/deviation.md",
+                ".agents/skills/spec-import/SKILL.md",
+                ".agents/skills/spec-index/SKILL.md",
+                ".agents/skills/spec-start/SKILL.md",
+                ".agents/skills/spec-reconcile/SKILL.md",
+                ".agents/skills/spec-review/SKILL.md",
+                ".github/skills/spec-start/SKILL.md",
+            ],
+            MissingPaths:
+            [
+                ".worklog",
                 "docs/worklog-method.md",
-                ".worklog/README.md",
-                ".worklog/INDEX.md",
-                ".worklog/archive",
-                ".worklog/_templates/spec.md",
-                ".agents/skills/worklog-import/SKILL.md",
-                ".agents/skills/worklog-index/SKILL.md",
+                "docs/ai-context/packs/worklog.md",
                 ".agents/skills/worklog-start/SKILL.md",
-                ".agents/skills/worklog-reconcile/SKILL.md",
-                ".agents/skills/worklog-review/SKILL.md",
-                ".claude/skills/worklog-import/SKILL.md",
-                ".claude/skills/worklog-index/SKILL.md",
-                ".claude/skills/worklog-start/SKILL.md",
-                ".claude/skills/worklog-reconcile/SKILL.md",
-                ".claude/skills/worklog-review/SKILL.md",
+            ],
+            Contains:
+            [
+                new ContentExpectation("docs/spec-guided-dev-method.md", "Migration From Worklog"),
+            ]),
+        new(
+            "with-spec-guided-dev-no-copilot",
+            ["--with-spec-guided-dev", "true", "--no-copilot", "true"],
+            ExistingPaths:
+            [
+                "docs/spec-guided-dev-method.md",
+                ".specs/README.md",
+                ".specs/INDEX.md",
+                ".specs/archive",
+                ".specs/deviations",
+                ".specs/_templates/spec.md",
+                ".agents/skills/spec-import/SKILL.md",
+                ".agents/skills/spec-index/SKILL.md",
+                ".agents/skills/spec-start/SKILL.md",
+                ".agents/skills/spec-reconcile/SKILL.md",
+                ".agents/skills/spec-review/SKILL.md",
+                ".claude/skills/spec-import/SKILL.md",
+                ".claude/skills/spec-index/SKILL.md",
+                ".claude/skills/spec-start/SKILL.md",
+                ".claude/skills/spec-reconcile/SKILL.md",
+                ".claude/skills/spec-review/SKILL.md",
             ],
             MissingPaths:
             [
                 ".github",
+                ".worklog",
             ],
             Contains: []),
         new(
@@ -327,9 +371,9 @@ sealed class SmokeTestRunner
             AssertContains(outputPath, expectation.RelativePath, expectation.ExpectedText);
         }
 
-        if (scenario.Name == "with-worklog")
+        if (scenario.Name == "with-spec-guided-dev")
         {
-            ValidateWorklogMethodology(outputPath);
+            ValidateSpecGuidedDevMethodology(outputPath);
         }
     }
 
@@ -371,18 +415,20 @@ sealed class SmokeTestRunner
         }
     }
 
-    private static void ValidateWorklogMethodology(string outputPath)
+    private static void ValidateSpecGuidedDevMethodology(string outputPath)
     {
-        AssertNotContains(outputPath, ".worklog/_templates/spec.md", "## Outcome");
-        AssertNotContains(outputPath, ".worklog/_templates/adr.md", "## Outcome");
-        AssertContains(outputPath, ".worklog/_templates/spike.md", "## Result");
-        AssertContains(outputPath, ".worklog/_templates/spike.md", "## Recommendation");
+        AssertNotContains(outputPath, ".specs/_templates/spec.md", "\n## Outcome\n");
+        AssertNotContains(outputPath, ".specs/_templates/adr.md", "\n## Outcome\n");
+        AssertContains(outputPath, ".specs/_templates/spike.md", "## Result");
+        AssertContains(outputPath, ".specs/_templates/spike.md", "## Recommendation");
+        AssertContains(outputPath, ".specs/_templates/deviation.md", "Type: deviation");
+        AssertNotExists(outputPath, ".specs/deviations/archive");
 
         foreach (var skillRoot in new[] { ".agents/skills", ".claude/skills", ".github/skills" })
         {
-            AssertNotContains(outputPath, $"{skillRoot}/worklog-reconcile/SKILL.md", "Add or update `Outcome`");
-            AssertContains(outputPath, $"{skillRoot}/worklog-review/SKILL.md", "Specs and ADRs must not contain `Outcome`.");
-            AssertContains(outputPath, $"{skillRoot}/worklog-review/SKILL.md", "report it as a structure violation");
+            AssertContains(outputPath, $"{skillRoot}/spec-review/SKILL.md", "Does the document have required sections for its type?");
+            AssertContains(outputPath, $"{skillRoot}/spec-review/SKILL.md", "Are deviations temporary and separate from specs?");
+            AssertContains(outputPath, $"{skillRoot}/spec-reconcile/SKILL.md", "Temporary deviation needed");
         }
     }
 

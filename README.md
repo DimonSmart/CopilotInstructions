@@ -17,14 +17,15 @@ and stays lightweight enough for a normal `dotnet new` workflow.
   - `.github/skills/*/SKILL.md` (Copilot project-local skills)
   - `AGENTS.md` (shared agent entry point)
 - Optional path-specific GitHub Copilot instructions in `.github/instructions/`.
-- Optional worklog-driven development files with `.worklog`, archive, index, templates, and project-local skills.
+- Optional Spec Guided Dev files with `.specs`, archive, temporary deviations, index, templates, and project-local skills.
 - Optional switches:
   - `--no-codex` (skip `AGENTS.md`, companion agent files, and agent/Claude skills)
   - `--no-copilot` (skip `.github/copilot-instructions.md`)
   - `--profile` (`default`, `library`, `aspnet`, `blazor`)
   - `--packs "tests;mcp"` (additional packs)
   - `--with-path-instructions true`
-  - `--with-worklog true`
+  - `--with-spec-guided-dev true`
+  - `--with-worklog true` (legacy alias)
 
 ## Quick start
 
@@ -45,7 +46,7 @@ and stays lightweight enough for a normal `dotnet new` workflow.
 ```text
 docs/
   AI_RULES.md
-  worklog-method.md    # with --with-worklog true
+  spec-guided-dev-method.md    # with --with-spec-guided-dev true
   ai-context/
     core.md
     dotnet.md
@@ -58,7 +59,7 @@ docs/
 .agents/
   skills/
 
-.claude/              # with --with-worklog true
+.claude/              # with --with-spec-guided-dev true
   skills/
 
 .github/
@@ -66,9 +67,10 @@ docs/
   instructions/
   skills/
 
-.worklog/                 # with --with-worklog true
+.specs/                  # with --with-spec-guided-dev true
   _templates/
   archive/
+  deviations/
   INDEX.md
   README.md
 
@@ -112,17 +114,43 @@ Generate GitHub Copilot path-specific instructions:
 dotnet new copilot-instructions --with-path-instructions true
 ```
 
-Generate worklog methodology and skills:
+Generate Spec Guided Dev methodology and skills:
+
+```bash
+dotnet new copilot-instructions --with-spec-guided-dev true
+```
+
+This adds `.specs/`, `.specs/archive/`, `.specs/deviations/`, `.specs/INDEX.md`, spec document templates, and `spec-start`, `spec-import`, `spec-reconcile`, `spec-review`, and `spec-index` skills.
+
+Spec Guided Dev is an AI-assisted development method where a living specification guides implementation without replacing engineering judgment.
+
+In AI development, the key skill is no longer just writing code, but describing intent precisely enough that both humans and AI agents can act on it.
+
+The specification is not a task list. It is the durable description of the product: behavior, contracts, architecture, constraints, non-goals, and verification rules. If the implementation is deleted, the product should be rebuildable from the specification.
+
+Spec documents use `NNNN.type-short-title.md` directly under `.specs/` for current documents, and the same naming under `.specs/archive/` for archived history. File names do not include active or retired lifecycle markers.
+
+Spec document types are `spec` for durable product intent, `adr` for an accepted decision and rationale, `spike` for an investigation result and recommendation, and `deviation` for temporary implementation gaps under `.specs/deviations/`.
+
+Legacy alias:
 
 ```bash
 dotnet new copilot-instructions --with-worklog true
 ```
 
-This adds `.worklog/`, `.worklog/archive/`, `.worklog/INDEX.md`, work document templates, and `worklog-start`, `worklog-import`, `worklog-reconcile`, `worklog-review`, and `worklog-index` skills.
+The legacy alias generates the Spec Guided Dev files and exists only for migration compatibility.
 
-Worklog documents use `NNNN.type-short-title.md` directly under `.worklog/` for current documents, and the same naming under `.worklog/archive/` for archived history. File names do not include active or retired lifecycle markers.
+Migration from existing worklog projects:
 
-Worklog document types are intentionally narrow: `spec` records current intended behavior, `adr` records an accepted decision and rationale, and `spike` records an investigation result and recommendation.
+1. Move `.worklog/` to `.specs/`.
+2. Move `.worklog/archive/` to `.specs/archive/`.
+3. Replace `docs/worklog-method.md` with `docs/spec-guided-dev-method.md`.
+4. Replace `docs/ai-context/packs/worklog.md` with `docs/ai-context/packs/spec-guided-dev.md`.
+5. Rename `worklog-*` skills to `spec-*` skills.
+6. Keep document numbers unchanged.
+7. Do not change document meaning during migration.
+8. Do not delete existing Outcome sections automatically.
+9. Use `.specs/deviations/` only for temporary current implementation gaps.
 
 ## Updating the template
 
