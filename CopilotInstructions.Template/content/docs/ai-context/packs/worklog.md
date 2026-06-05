@@ -35,8 +35,15 @@ Do not archive and replace a document for cleanup-only changes.
 
 If the edit changes intended behavior, scope, non-goals, constraints, done criteria, or an accepted decision, treat it as semantic and do not hide it as cleanup.
 
-After significant work tracked by a work document, reconcile the document with the actual result. Add or update `Outcome` only when the implementation, verification, deviations, limitations, or follow-up contain durable information that should remain visible in the repository.
+After significant work tracked by a work document, check whether the current document still describes the actual intended behavior or accepted decision.
 
-Do not use `Outcome` as task status. Do not archive a spec only because implementation is complete.
+If it still matches, do not update the worklog.
+
+If the requirement or decision changed substantially, archive the old document, create a new current document with a new number, and add `Replaces:`.
+
+If the implementation introduced a new durable decision, create an ADR.
+If it revealed uncertainty that needs research, create a spike.
+
+Do not use work documents for implementation status, completion notes, routine verification output, or execution summaries.
 
 Accepted ADRs and old requirements are immutable. If a decision or requirement changes, create a new current document and archive the old one.

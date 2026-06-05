@@ -23,15 +23,17 @@ Check:
 6. Are archived work documents stored under `.worklog/archive/`?
 7. Do work document filenames avoid old lifecycle markers?
 8. Does `.worklog/INDEX.md` exist and reflect the current numbered documents?
-9. Does the document have clear Goal, Context, and done criteria?
-10. For specs, are scope and non-goals present?
-11. For specs and ADRs, if `Outcome` exists, does it add durable engineering context instead of task status?
-12. For spikes, are `Result` and `Recommendation` present and meaningful?
-13. Are archived documents excluded from current requirements unless referenced through `Replaces` or explicitly needed for history?
-14. If an old requirement or ADR changed, was the old document moved to `.worklog/archive/` and the new current document given `Replaces:`?
-15. Are accepted ADRs and old requirements left semantically immutable?
-16. Are micro-changes and product-neutral small changes kept out of `.worklog/` and left to commit messages?
-17. Are product-neutral dependency updates, library API migrations, executor/source-generator style changes, and framework idiom alignment kept out of `spec` documents when behavior, domain contracts, and architecture decisions stay the same?
+9. Does every work document have a title, `Type:`, and `Related:` with document numbers or `none`?
+10. For specs, are `Goal`, `Context`, `Scope`, `Non-goals`, `Acceptance criteria`, and `Verification` present and clear?
+11. For ADRs, are `Context`, `Options considered`, `Decision`, and `Consequences` present and clear?
+12. For spikes, are `Goal`, `Hypothesis`, `Experiment`, `Constraints`, done criteria, `Result`, and `Recommendation` present and meaningful?
+13. Specs and ADRs must not contain `Outcome`.
+14. If a spec or ADR contains `Outcome`, report it as a structure violation and recommend moving durable semantic changes into a replacement document, or moving execution notes to commit, PR, or issue.
+15. Are archived documents excluded from current requirements unless referenced through `Replaces` or explicitly needed for history?
+16. If an old requirement or ADR changed, was the old document moved to `.worklog/archive/` and the new current document given `Replaces:`?
+17. Are accepted ADRs and old requirements left semantically immutable?
+18. Are micro-changes and product-neutral small changes kept out of `.worklog/` and left to commit messages?
+19. Are product-neutral dependency updates, library API migrations, executor/source-generator style changes, and framework idiom alignment kept out of `spec` documents when behavior, domain contracts, and architecture decisions stay the same?
 
 Non-semantic edit checks:
 

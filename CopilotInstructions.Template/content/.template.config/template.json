@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "DimonSmart",
-  "classifications": [ "Docs", "Copilot", "Codex" ],
+  "classifications": [ "Docs", "Copilot", "Agents", "Codex" ],
   "identity": "DimonSmart.CopilotInstructions",
-  "name": "AI instructions files (Copilot + Codex)",
+  "name": "AI instructions files (Copilot + agents)",
   "shortName": "copilot-instructions",
   "tags": { "language": "none", "type": "item" },
   "preferNameDirectory": false,
@@ -12,7 +12,7 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Do not create AGENTS.md, companion agent files, or Codex/Claude skills"
+      "description": "Do not create AGENTS.md, companion agent files, or agent/Claude skills"
     },
     "no-copilot": {
       "type": "parameter",

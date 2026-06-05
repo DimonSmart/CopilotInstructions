@@ -1,10 +1,10 @@
 ---
 id: agents-entry
-scope: [codex]
+scope: [codex, claude, gemini]
 category: entry-point
 requires: [ai-rules]
 ---
-# Codex instructions
+# Agent instructions
 
 Primary rules: `docs/AI_RULES.md`.
 
@@ -13,7 +13,6 @@ When changing code:
 - read `docs/ai-context/dotnet.md` for C# and .NET changes
 - apply matching skills from `.agents/skills/` when present
 - apply every file in `docs/ai-context/packs/` when present
-- use prompts from `docs/codex-prompts/` for task-specific guidance when present
 - keep changes small and predictable
 - run repo checks before finishing (see `docs/AI_RULES.md` for commands)
 

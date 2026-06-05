@@ -24,7 +24,7 @@ What should be checked.
 
 What must not be changed during the spike.
 
-## Done when
+## Done criteria
 
 - result is documented;
 - recommendation is written;

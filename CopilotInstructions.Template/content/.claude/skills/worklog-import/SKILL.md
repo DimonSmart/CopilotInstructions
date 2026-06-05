@@ -206,6 +206,8 @@ Do not reorder documents based on guessed importance.
 - Prefer `git mv` for tracked files.
 - Use normal filesystem move only for untracked files.
 - Do not edit document content unless the user explicitly asks to normalize sections.
+- Do not require or normalize `Outcome`.
+- If an imported legacy spec or ADR contains `Outcome`, preserve it during import unless the user explicitly asks for normalization. Review should later flag it as a legacy structure issue.
 - Do not create numbered work documents for product-neutral small changes that belong in commit messages.
 - Do not create numbered work documents for micro-changes or changes fully explained by the diff and commit message.
 

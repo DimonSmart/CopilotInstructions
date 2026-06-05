@@ -66,9 +66,3 @@ Commands or manual checks:
 ```bash
 dotnet test
 ```
-
-## Outcome
-
-<!-- Optional. Add after implementation only when there are deviations,
-important implementation notes, partial verification, limitations, or follow-up
-items worth preserving. Do not use this section as task status. -->

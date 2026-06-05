@@ -8,7 +8,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
     <PackageLicenseExpression>0BSD</PackageLicenseExpression>
-    <Description>Template that creates compact AI instructions for Copilot and Codex</Description>
+    <Description>Template that creates compact AI instructions for Copilot and coding agents</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 

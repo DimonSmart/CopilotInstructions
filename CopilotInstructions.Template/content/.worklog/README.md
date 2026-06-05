@@ -18,9 +18,9 @@ Draft documents are not committed to the main branch.
 
 Types:
 
-- `spec` - feature or behavior change;
-- `adr` - architecture decision;
-- `spike` - investigation.
+- `spec` - current intended behavior;
+- `adr` - accepted decision and rationale;
+- `spike` - investigation result and recommendation.
 
 There is no `task` worklog type. Small local changes belong in commit messages unless they require a `spec`, `adr`, or `spike`.
 
@@ -58,9 +58,13 @@ Before implementation, make sure the document has:
 - done criteria;
 - verification plan.
 
-After significant implementation, reconcile the work document with the actual result. Add or update `Outcome` only when there are deviations, important implementation notes, verification details, limitations, or follow-up work worth preserving.
+After significant implementation, reconcile the work document with the actual result.
 
-Do not use `Outcome` as task status. Do not archive a spec only because it was implemented.
+If the current document still describes the intended behavior or accepted decision, leave it unchanged.
+
+If the requirement or decision changed substantially, archive the old document and create a new current document with `Replaces:`.
+
+Do not use work documents for implementation status, completion notes, routine verification output, or execution summaries. Do not archive a spec only because it was implemented.
 
 Do not add a numbered document for micro-changes, typos, formatting, obvious local fixes, small refactoring with no behavior or architecture meaning, dependency patches with no project-specific decision, or changes that do not affect the product as such. If a small change is fully explained by the diff and commit message, keep it out of `.worklog`.
 

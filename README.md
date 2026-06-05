@@ -1,6 +1,6 @@
 # CopilotInstructions Template
 
-Generate compact shared AI guidance for both GitHub Copilot and Codex. The template keeps one main entry file, moves details into short context files,
+Generate compact shared AI guidance for GitHub Copilot and agent entry files. The template keeps one main entry file, moves details into short context files,
 and stays lightweight enough for a normal `dotnet new` workflow.
 
 ## What's included
@@ -12,14 +12,14 @@ and stays lightweight enough for a normal `dotnet new` workflow.
   - `docs/ai-skills/*/references/*.md` (shared detailed skill references)
   - `docs/ai-context/packs/*.md` (selected optional packs)
   - `docs/ai-context/references/*.md` (short checklists)
-  - `.agents/skills/*/SKILL.md` (Codex project-local skills)
+  - `.agents/skills/*/SKILL.md` (agent project-local skills)
   - `.github/copilot-instructions.md` (Copilot entry point)
   - `.github/skills/*/SKILL.md` (Copilot project-local skills)
-  - `AGENTS.md` (Codex entry point)
+  - `AGENTS.md` (shared agent entry point)
 - Optional path-specific GitHub Copilot instructions in `.github/instructions/`.
 - Optional worklog-driven development files with `.worklog`, archive, index, templates, and project-local skills.
 - Optional switches:
-  - `--no-codex` (skip `AGENTS.md`, companion agent files, and Codex/Claude skills)
+  - `--no-codex` (skip `AGENTS.md`, companion agent files, and agent/Claude skills)
   - `--no-copilot` (skip `.github/copilot-instructions.md`)
   - `--profile` (`default`, `library`, `aspnet`, `blazor`)
   - `--packs "tests;mcp"` (additional packs)
@@ -94,7 +94,7 @@ Generate only Copilot files:
 dotnet new copilot-instructions --no-codex true
 ```
 
-Generate only Codex files:
+Generate only agent entry files:
 
 ```bash
 dotnet new copilot-instructions --no-copilot true
@@ -122,6 +122,8 @@ This adds `.worklog/`, `.worklog/archive/`, `.worklog/INDEX.md`, work document t
 
 Worklog documents use `NNNN.type-short-title.md` directly under `.worklog/` for current documents, and the same naming under `.worklog/archive/` for archived history. File names do not include active or retired lifecycle markers.
 
+Worklog document types are intentionally narrow: `spec` records current intended behavior, `adr` records an accepted decision and rationale, and `spike` records an investigation result and recommendation.
+
 ## Updating the template
 
 When a new release ships with refined guidelines, reinstall the template and recreate files where you need the latest version:
@@ -134,7 +136,7 @@ Run `dotnet new copilot-instructions` again in each repository that should adopt
 
 ## Optional extras
 
-- `docs/codex-prompts/` contains reusable prompt templates that can be copied into `~/.codex/prompts`.
+- `docs/codex-prompts/` contains reusable Codex prompt templates that can be copied into `~/.codex/prompts`.
 - If you use GitHub Copilot coding agent hooks, consider adding `.github/hooks/hooks.json` in your target repository to enforce checks such as `dotnet test`.
 
 ## Smoke test

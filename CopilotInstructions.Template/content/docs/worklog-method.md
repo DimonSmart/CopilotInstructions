@@ -225,46 +225,63 @@ This is a semantic change. It must not be presented as simple spec cleanup.
 
 ## Required Sections
 
-Every work document should have:
+Every work document must have:
 
 - title;
 - type;
-- related documents;
+- related documents, or `none`.
+
+Specs must have:
+
 - goal;
 - context;
-- done criteria.
+- scope;
+- non-goals;
+- acceptance criteria;
+- verification.
 
-Specs should also record scope and non-goals. For spikes, `Result` and `Recommendation` are required.
+ADRs must have:
+
+- context;
+- options considered;
+- decision;
+- consequences.
+
+Spikes must have:
+
+- goal;
+- hypothesis;
+- experiment;
+- constraints;
+- done criteria;
+- result;
+- recommendation.
 
 When a new document replaces an older one, it must include:
 
 - `Replaces`.
 
-## Outcome
+## Implementation result
 
-`Outcome` is optional for `spec` and `adr`.
+Work documents describe durable project intent, decisions, and investigations.
+They are not task records.
 
-Add `Outcome` only when the actual implementation or investigation produced durable engineering context that is not obvious from the final code, commits, pull request, or tests.
+Do not add implementation status, completion notes, execution summaries, or
+routine verification output to `spec` or `adr` documents.
 
-Good reasons to add `Outcome`:
+After implementation:
 
-- implementation differs from the original plan;
-- only part of the scope was implemented;
-- an important technical nuance appeared during implementation;
-- verification was partial or manual;
-- a limitation was discovered;
-- follow-up work should be preserved;
-- the original spec remains mostly valid, but a small nuance changes how it should be understood.
+1. If the current work document still describes the intended behavior or accepted
+   decision, leave it unchanged.
+2. If the requirement or decision changed substantially, archive the old document
+   and create a new current document with `Replaces:`.
+3. If implementation introduced a new durable architectural decision, create an ADR.
+4. If implementation revealed uncertainty that needs research, create a spike.
+5. Keep execution details, completed work summaries, routine verification output,
+   and local implementation notes in commits, pull requests, or issue tracker.
 
-Do not use `Outcome` to mark a spec as done.
-
-A spec may remain current after implementation if it still describes current intended behavior.
-
-If the meaning of the requirement or decision changed substantially, do not patch it through `Outcome`. Archive the old document and create a new current document with `Replaces:`.
-
-Accepted ADR decisions must not be rewritten after acceptance. `Outcome` may record small execution notes only when they do not change the accepted decision.
-
-For `spike`, `Result` and `Recommendation` remain required.
+Spikes are different: they must record `Result` and `Recommendation`, because
+their purpose is to preserve investigation output.
 
 ## Agent Workflow
 
@@ -272,14 +289,16 @@ Before significant implementation:
 
 1. Read numbered current `.worklog/NNNN.*.md` documents relevant to the task.
 2. Decide whether a new work document is needed.
-3. If needed, create the next numbered document from `.worklog/_templates`.
-4. Confirm scope, non-goals, and done criteria.
-5. Implement only the described scope.
+3. If needed, create the next numbered document from the matching `.worklog/_templates` file.
+4. Confirm the required sections for that document type.
+5. For specs, confirm scope, non-goals, acceptance criteria, and verification.
+6. Implement only the described scope.
 
 After significant implementation or investigation:
 
 1. Run verification commands.
 2. Reconcile the work document with the actual result.
-3. Decide whether no worklog update is needed, `Outcome` should be added or updated, or a new work document should replace the old one.
-4. Record deviations, limitations, partial verification, or follow-up only when they add durable context.
+3. Decide whether no worklog update is needed, a replacement work document is
+   needed, or an additional spec, ADR, or spike is needed.
+4. Do not add implementation status or completion notes to specs or ADRs.
 5. Do not silently rewrite existing requirements or accepted ADRs.

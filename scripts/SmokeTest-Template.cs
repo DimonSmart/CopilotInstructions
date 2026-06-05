@@ -326,6 +326,11 @@ sealed class SmokeTestRunner
         {
             AssertContains(outputPath, expectation.RelativePath, expectation.ExpectedText);
         }
+
+        if (scenario.Name == "with-worklog")
+        {
+            ValidateWorklogMethodology(outputPath);
+        }
     }
 
     private static void AssertExists(string root, string relativePath)
@@ -353,6 +358,31 @@ sealed class SmokeTestRunner
         if (!content.Contains(expectedText, StringComparison.Ordinal))
         {
             throw new InvalidOperationException($"Expected '{relativePath}' to contain '{expectedText}'.");
+        }
+    }
+
+    private static void AssertNotContains(string root, string relativePath, string unexpectedText)
+    {
+        var path = Path.Combine(root, relativePath);
+        var content = File.ReadAllText(path);
+        if (content.Contains(unexpectedText, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"Expected '{relativePath}' not to contain '{unexpectedText}'.");
+        }
+    }
+
+    private static void ValidateWorklogMethodology(string outputPath)
+    {
+        AssertNotContains(outputPath, ".worklog/_templates/spec.md", "## Outcome");
+        AssertNotContains(outputPath, ".worklog/_templates/adr.md", "## Outcome");
+        AssertContains(outputPath, ".worklog/_templates/spike.md", "## Result");
+        AssertContains(outputPath, ".worklog/_templates/spike.md", "## Recommendation");
+
+        foreach (var skillRoot in new[] { ".agents/skills", ".claude/skills", ".github/skills" })
+        {
+            AssertNotContains(outputPath, $"{skillRoot}/worklog-reconcile/SKILL.md", "Add or update `Outcome`");
+            AssertContains(outputPath, $"{skillRoot}/worklog-review/SKILL.md", "Specs and ADRs must not contain `Outcome`.");
+            AssertContains(outputPath, $"{skillRoot}/worklog-review/SKILL.md", "report it as a structure violation");
         }
     }
 

@@ -26,8 +26,8 @@ Task:
    - fill it using the matching template;
    - keep scope narrow;
    - add explicit non-goals for specs;
-   - add done criteria;
-   - add verification commands if known.
+   - add acceptance criteria and verification commands for specs;
+   - add done criteria for spikes.
 5. If the new document replaces an existing current document:
    - move the old file from `.worklog/` to `.worklog/archive/`;
    - add `Replaces:` with the old document number to the new document;
